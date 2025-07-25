@@ -1,3 +1,4 @@
+import "@/assets/css/index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createHashHistory,
