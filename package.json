@@ -8,9 +8,22 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "update:browsers": "npx update-browserslist-db@latest",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist",
     "typecheck": "tsc -p tsconfig.app.json --noEmit"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "dependencies": {
     "@tanstack/react-query": "^5.83.0",
