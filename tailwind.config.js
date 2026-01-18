@@ -4,6 +4,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        mobile: { max: "1023px" },
+        pc: "1024px",
+      },
       colors: {
         // 라이트 모드 기본 색상
         background: "#f9f9f9", // off-white

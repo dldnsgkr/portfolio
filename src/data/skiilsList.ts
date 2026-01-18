@@ -56,31 +56,54 @@ import jenkins from "@/assets/icon/icon_jenkins.svg";
 import notion from "@/assets/icon/icon_notion.svg";
 
 // type
-import type { SkillWrapperType } from "@/types/slillsList.types";
+import type { SkillWrapperType } from "@/types/skillsList.types";
 
 export const mainStacksData: SkillWrapperType = {
   secTit: "Main Stacks",
+  subTit: "현재 주력으로 사용하며 프로젝트에 지속적으로 적용 중",
   className: "",
   skillList: [
     {
       imgPath: react,
       imgAlt: "React icon",
       name: "React",
+      textDatas: [
+        "zustand 기반 전역 상태",
+        "Custom Hook 사용 가능",
+        "재사용 가능 공통 컴포넌트 설계(button, input, modal)",
+        "React Hook Form을 이용한 form 관리",
+        "zod를 활용한 schema validation",
+        "환경 변수를 이용한 환경별 값 설정",
+      ],
     },
     {
       imgPath: next,
       imgAlt: "Next icon",
       name: "Next",
-    },
-    {
-      imgPath: typeScript,
-      imgAlt: "TypeScript icon",
-      name: "TypeScript",
+      textDatas: [
+        "App router 기반의 라우팅 구조",
+        "Layout, template을 분리 하여 설계",
+        "tossPayments, kgmobilance 와 연동하며 App Router 기반 서버 단에서 API 응답에 따른 처리",
+      ],
     },
     {
       imgPath: javaScript,
       imgAlt: "JavaScript icon",
       name: "JavaScript",
+      textDatas: [
+        "backend API와 연결되는 API 연동 경험(axios, fetch)",
+        "이벤트 처리, DOM 구조에 대한 기능 함수 구현",
+        "주로 사용하는 공통 util 함수(debounce, throttle, etc..) 등을 구현",
+      ],
+    },
+    {
+      imgPath: typeScript,
+      imgAlt: "TypeScript icon",
+      name: "TypeScript",
+      textDatas: [
+        "각 컴포넌트, props, API request, response 등에 대한 타입 정의",
+        "Union, optional, generic 타입을 활용해 재사용 type 작성",
+      ],
     },
     {
       imgPath: tailwindcss,
@@ -101,21 +124,6 @@ export const mainStacksData: SkillWrapperType = {
       imgPath: vscode,
       imgAlt: "Vscode icon",
       name: "Vscode",
-    },
-    {
-      imgPath: prettier,
-      imgAlt: "Prettier icon",
-      name: "Prettier",
-    },
-    {
-      imgPath: eslint,
-      imgAlt: "Eslint icon",
-      name: "Eslint",
-    },
-    {
-      imgPath: immer,
-      imgAlt: "Immer icon",
-      name: "Immer",
     },
     {
       imgPath: zustand,
@@ -148,16 +156,6 @@ export const mainStacksData: SkillWrapperType = {
       name: "DBeaver",
     },
     {
-      imgPath: npm,
-      imgAlt: "npm icon",
-      name: "npm",
-    },
-    {
-      imgPath: pnpm,
-      imgAlt: "pnpm icon",
-      name: "pnpm",
-    },
-    {
       imgPath: shadcn,
       imgAlt: "shadcn icon",
       name: "shadcn",
@@ -178,11 +176,6 @@ export const mainStacksData: SkillWrapperType = {
       name: "date-fns",
     },
     {
-      imgPath: tanstack,
-      imgAlt: "tanstack-query icon",
-      name: "tanstack-query",
-    },
-    {
       imgPath: html5,
       imgAlt: "html5 icon",
       name: "html5",
@@ -192,8 +185,39 @@ export const mainStacksData: SkillWrapperType = {
 
 export const experienceStacksData: SkillWrapperType = {
   secTit: "Experience Stacks",
+  subTit: "실무 및 개인 프로젝트에서 사용 경험이 있는 기술",
   className: "",
   skillList: [
+    {
+      imgPath: npm,
+      imgAlt: "npm icon",
+      name: "npm",
+    },
+    {
+      imgPath: pnpm,
+      imgAlt: "pnpm icon",
+      name: "pnpm",
+    },
+    {
+      imgPath: tanstack,
+      imgAlt: "tanstack-query icon",
+      name: "tanstack-query",
+    },
+    {
+      imgPath: prettier,
+      imgAlt: "Prettier icon",
+      name: "Prettier",
+    },
+    {
+      imgPath: eslint,
+      imgAlt: "Eslint icon",
+      name: "Eslint",
+    },
+    {
+      imgPath: immer,
+      imgAlt: "Immer icon",
+      name: "Immer",
+    },
     {
       imgPath: bun,
       imgAlt: "bun icon",

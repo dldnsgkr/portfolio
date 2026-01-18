@@ -1,5 +1,6 @@
 export type SkillWrapperType = {
   secTit: string;
+  subTit: string;
   className?: string;
   // skill 목록
   skillList: {

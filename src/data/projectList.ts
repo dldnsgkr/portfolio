@@ -1,8 +1,16 @@
 export const projectListData = [
   {
-    title: "crawling",
-    description:
-      "A modern portfolio website built with React, Tailwind and Framer Motion.",
+    title: "SmartKeeper 어플리케이션 개발",
+    description: "자회사의 webview에 사용될 화면 개발",
+    contentText: [
+      "html + chart.js, highcharts, apache echart 등을 활용한 차트 작업",
+      "ajax를 활용해 동적으로 데이터를 받아와 처리하는 작업",
+      "막대 차트 및 도넛, 라인등의 여러 혼합차트를 작업 했습니다",
+    ],
+  },
+  {
+    title: "중소기업기술정보진흥원 지능형 추천시스템 개발",
+    description: "",
     contentText: [
       "selenium을 활용한 크롤링 작업을 했습니다.",
       "크롤링한 데이터를 가공하여 엑셀로 저장하는 작업을 했습니다.",
@@ -10,9 +18,13 @@ export const projectListData = [
   },
   {
     title: "UPDEV",
-    description:
-      "A modern portfolio website built with React, Tailwind and Framer Motion.",
-    contentText: ["spring, mybatis 기반"],
+    description: "게시판 기반 웹사이트",
+    contentText: [
+      "spring, mybatis 기반 백엔드 담당",
+      "cookie를 이용해 자동 로그인 기능 구현",
+      "기본 CRUD 기능 구현",
+      "좋아요, 조회수, 댓글, 대댓글 기능 구현",
+    ],
   },
   {
     title: "HeartField",
@@ -24,15 +36,13 @@ export const projectListData = [
     ],
   },
   {
-    title: "form-pet",
+    title: "Hectofinancial",
     description:
       "A modern portfolio website built with React, Tailwind and Framer Motion.",
-    contentText: [
-      "main이 아닌 sub로 후임이 어려워하는 부분 작업 및 일정에 맞지 않을 것 같아서 작업 보조 역할로 참여했습니다.",
-    ],
+    contentText: ["react 기반의 공통컴포넌트 구축 작업을 했습니다."],
   },
   {
-    title: "Hectofinancial",
+    title: "etevers",
     description:
       "A modern portfolio website built with React, Tailwind and Framer Motion.",
     contentText: ["react 기반의 공통컴포넌트 구축 작업을 했습니다."],
