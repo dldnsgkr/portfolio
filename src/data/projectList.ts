@@ -1,4 +1,6 @@
-export const projectListData = [
+import type { ProjectWrapperType } from "@/types/projectList.types";
+
+export const projectListData: ProjectWrapperType[] = [
   {
     title: "SmartKeeper 어플리케이션 개발",
     description: "자회사의 webview에 사용될 화면 개발",
@@ -14,16 +16,6 @@ export const projectListData = [
     contentText: [
       "selenium을 활용한 크롤링 작업을 했습니다.",
       "크롤링한 데이터를 가공하여 엑셀로 저장하는 작업을 했습니다.",
-    ],
-  },
-  {
-    title: "UPDEV",
-    description: "게시판 기반 웹사이트",
-    contentText: [
-      "spring, mybatis 기반 백엔드 담당",
-      "cookie를 이용해 자동 로그인 기능 구현",
-      "기본 CRUD 기능 구현",
-      "좋아요, 조회수, 댓글, 대댓글 기능 구현",
     ],
   },
   {
@@ -64,6 +56,19 @@ export const projectListData = [
       "순수 html, js, css 만을 사용해서 작업했습니다.",
       "웹 접근성(공공기관 기준)을 준수하여 작업했습니다.",
       "퍼블리싱 된 html 화면을 jsp로 변환 및 백엔드(spring boot)와 연동 작업을 했습니다.",
+    ],
+  },
+];
+
+export const toyProjectListData: ProjectWrapperType[] = [
+  {
+    title: "UPDEV",
+    description: "게시판 기반 웹사이트",
+    contentText: [
+      "spring, mybatis 기반 백엔드 담당",
+      "cookie를 이용해 자동 로그인 기능 구현",
+      "기본 CRUD 기능 구현",
+      "좋아요, 조회수, 댓글, 대댓글 기능 구현",
     ],
   },
 ];

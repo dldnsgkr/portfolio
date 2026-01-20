@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import TestImage from "../assets/image/test_image.png";
+import TestImage from "../../assets/image/test_image.png";
 import ProjectModal from "./ProjectModal";
 import { useState } from "react";
 

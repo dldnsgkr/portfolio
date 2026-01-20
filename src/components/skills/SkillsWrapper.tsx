@@ -3,7 +3,7 @@ import IconButton from "../button/IconButton";
 import type { SkillWrapperType } from "@/types/skillsList.types";
 
 const SkillsWrapper = ({
-  secTit,
+  mainTit,
   subTit,
   className,
   skillList,
@@ -11,7 +11,7 @@ const SkillsWrapper = ({
   return (
     <div className={clsx("flex flex-col gap-3 flex-1", className)}>
       <div>
-        <strong>{secTit}</strong>
+        <strong>{mainTit}</strong>
         <p>{subTit}</p>
       </div>
       <div

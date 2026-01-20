@@ -59,9 +59,9 @@ export default function App() {
           <Project />
         </Section>
 
-        <Section id="contact">
+        {/* <Section id="contact">
           <Contact />
-        </Section>
+        </Section> */}
       </main>
     </>
   );
