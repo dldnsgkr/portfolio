@@ -12,7 +12,7 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "중소기업기술정보진흥원 지능형 추천시스템 개발",
-    description: "",
+    description: "웹 크롤링 기반 데이터 수집 및 가공 자동화",
     contentText: [
       "selenium을 활용한 크롤링 작업을 했습니다.",
       "크롤링한 데이터를 가공하여 엑셀로 저장하는 작업을 했습니다.",
@@ -20,8 +20,7 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "HeartField",
-    description:
-      "A modern portfolio website built with React, Tailwind and Framer Motion.",
+    description: "첫번째 정식 main project(webview)",
     contentText: [
       "next.js 기반 web view 화면 작업했습니다.",
       "toss payments, kgmobiliance(결제 및 본인인증) 연동 작업했습니다.",
@@ -29,14 +28,15 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "Hectofinancial",
-    description:
-      "A modern portfolio website built with React, Tailwind and Framer Motion.",
-    contentText: ["react 기반의 공통컴포넌트 구축 작업을 했습니다."],
+    description: "시작부터 함께한 첫 프로젝트",
+    contentText: [
+      "react 기반의 공통컴포넌트 구축 작업을 했습니다.",
+      "UI 특성 별로 layout component를 구분",
+    ],
   },
   {
     title: "etevers",
-    description:
-      "A modern portfolio website built with React, Tailwind and Framer Motion.",
+    description: "",
     contentText: ["react 기반의 공통컴포넌트 구축 작업을 했습니다."],
   },
   {

@@ -29,9 +29,11 @@ const IconButton = ({
         {children}
       </button>
       <Popup open={open} title={skillObj.name} onClose={() => setOpen(false)}>
-        <ul>
+        <ul className="mt-2 list-[upper-roman] pl-5 space-y-1.5 text-sm">
           {skillObj.textDatas?.map((detail, index) => (
-            <li key={index}>{detail}</li>
+            <li key={index} className="leading-relaxed">
+              {detail}
+            </li>
           ))}
         </ul>
       </Popup>

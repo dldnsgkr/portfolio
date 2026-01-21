@@ -5,7 +5,7 @@ import Section from "./components/Section";
 import { throttle } from "./lib/utils";
 import AboutMe from "./components/view/AboutMe";
 import Project from "./components/view/Project";
-import Contact from "./components/view/Contact";
+// import Contact from "./components/view/Contact";
 import Skills from "./components/view/Skills";
 
 export default function App() {

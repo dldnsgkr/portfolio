@@ -26,7 +26,7 @@ export default function ProjectCard({
         alt={`${title} project image`}
         className="mb-4 rounded-md"
       />
-      <h3 className="text-xl font-semibold text-primary dark:text-primary-dark mb-2 transition-colors duration-500 ease-in-out">
+      <h3 className="text-xl font-semibold break-keep text-primary dark:text-primary-dark mb-2 transition-colors duration-500 ease-in-out">
         {title}
       </h3>
       <p className="text-muted dark:text-muted-dark transition-colors duration-500 ease-in-out">
@@ -39,16 +39,19 @@ export default function ProjectCard({
             {title}
           </h3>
           <p className="mt-2 text-muted dark:text-muted-dark transition-colors duration-500">
-            This is a detailed description of the project.
+            {description}
           </p>
         </header>
-        <section className="space-y-4">
+        <section className="flex-1 overflow-y-auto space-y-4">
           <img src={TestImage} alt={`${title} project image`} />
-          <ul className="m-2 list-disc pl-5 space-y-2 text-muted dark:text-muted-dark marker:text-primary dark:marker:text-primary-dark">
-            {contentText.map((text, index) => (
-              <li key={index}>{text}</li>
-            ))}
-          </ul>
+          <div className="flex flex-col gap-2">
+            <span>담당 역할 및 주요 구현 기능</span>
+            <ul className="ml-2 list-disc pl-5 text-muted dark:text-muted-dark marker:text-primary dark:marker:text-primary-dark">
+              {contentText.map((text, index) => (
+                <li key={index}>{text}</li>
+              ))}
+            </ul>
+          </div>
         </section>
         <footer className="mt-6 flex justify-end">
           <button
