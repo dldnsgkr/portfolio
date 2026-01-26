@@ -19,12 +19,7 @@ const ProjectWrapper = ({
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projectList.map((project) => (
-          <ProjectCard
-            key={project.title}
-            title={project.title}
-            description={project.description}
-            contentText={project.contentText}
-          />
+          <ProjectCard key={project.title} {...project} />
         ))}
       </div>
     </div>
