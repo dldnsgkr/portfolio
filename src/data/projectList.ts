@@ -33,8 +33,19 @@ export const projectListData: ProjectWrapperType[] = [
     stackList: ["python", "selenium"],
     troubleShooting: [
       {
-        title: "",
-        content: "",
+        title: "파일 다운로드 완료 여부 체크 방식 개선",
+        content:
+          "파일 다운로드 완료 여부를 .crdownload 파일 체크 방식으로 판단하여 파일 손상 없이 안정적으로 후처리되도록 개선함",
+      },
+      {
+        title: "파일명 중복 처리 로직 구현",
+        content:
+          "동일 파일명 및 폴더명으로 인한 덮어쓰기 문제를 방지하기 위해 자동 파일명 중복 처리 로직을 구현함",
+      },
+      {
+        title: "크롬 드라이버 자동 설치 및 관리",
+        content:
+          "크롬 버전 변경에 따른 드라이버 충돌 문제를 자동 설치 방식으로 해결함",
       },
     ],
   },
