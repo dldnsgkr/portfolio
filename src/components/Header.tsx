@@ -53,7 +53,7 @@ const Header = () => {
         transition: { duration: 0.3, ease: "easeInOut" },
       }}
       className={clsx(
-        "fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b border-border dark:border-border-dark bg-surface/80 dark:bg-surface-dark/80 shadow-[0_2px_10px_rgba(0,0,0,0.3)] transition-colors duration-500 ease-in-out"
+        "fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b border-border dark:border-border-dark bg-surface/80 dark:bg-surface-dark/80 shadow-[0_2px_10px_rgba(0,0,0,0.3)] transition-colors duration-500 ease-in-out",
       )}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -68,7 +68,7 @@ const Header = () => {
 
         {/* 네비게이션 */}
         <nav className="hidden md:flex gap-8 text-sm font-medium items-center">
-          {["Hero", "About", "Projects", "Contact"].map((item) => (
+          {["Hero", "About", "Skills", "Projects"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -84,14 +84,14 @@ const Header = () => {
             onClick={toggleDarkMode}
             className={clsx(
               "ml-4 w-14 h-7 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-500 ease-in-out",
-              isDark ? "bg-accent-dark" : "bg-accent"
+              isDark ? "bg-accent-dark" : "bg-accent",
             )}
           >
             {/* 내부 원 */}
             <div
               className={clsx(
                 "w-5 h-5 rounded-full shadow-md bg-background dark:bg-surface transition-transform duration-500 ease-in-out transform",
-                isDark ? "translate-x-7" : "translate-x-0"
+                isDark ? "translate-x-7" : "translate-x-0",
               )}
             ></div>
           </div>

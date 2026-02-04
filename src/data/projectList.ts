@@ -190,5 +190,7 @@ export const toyProjectListData: ProjectWrapperType[] = [
       "기본 CRUD 기능 구현",
       "좋아요, 조회수, 댓글, 대댓글 기능 구현",
     ],
+    stackList: ["spring", "java", "mybatis", "oracle DB"],
+    troubleShooting: [],
   },
 ];
