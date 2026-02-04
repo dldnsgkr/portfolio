@@ -170,6 +170,13 @@ export const projectListData: ProjectWrapperType[] = [
       "퍼블리싱 된 html 화면을 jsp로 변환 및 백엔드(spring boot)와 연동 작업을 했습니다.",
     ],
     stackList: ["html", "css", "javascript", "ajax", "java", "spring boot"],
+    troubleShooting: [
+      {
+        title: "SVG를 활용한 노선도 구현",
+        content:
+          "SVG의 다양한 요소와 속성을 활용하여 SRT 노선도를 구현했습니다. 이를 통해 복잡한 그래픽을 효과적으로 표현하고, 사용자 인터랙션을 향상시킬 수 있었습니다.",
+      },
+    ],
   },
 ];
 
