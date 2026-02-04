@@ -100,10 +100,17 @@ export const projectListData: ProjectWrapperType[] = [
       "zod",
       "react-quill",
     ],
+    troubleShooting: [
+      {
+        title: "레이아웃 중복과 UI 관리 복잡도 문제",
+        content:
+          "프로젝트가 진행되면서 페이지별 UI 구조가 유사하지만 완전히 동일하지 않아, 기존 방식으로는 레이아웃 수정 시 여러 페이지를 함께 수정해야 하는 문제가 있었습니다. 이를 해결하기 위해 UI 특성에 따라 레이아웃을 컴포넌트화하고, 공통 컴포넌트를 중심으로 구조를 재설계하여 유지보수성과 재사용성을 개선했습니다.",
+      },
+    ],
   },
   {
     title: "etevers",
-    description: "",
+    description: "첫 대규모 프로젝트 및 ag-grid 경험",
     contentText: ["react 기반의 공통컴포넌트 구축 작업을 했습니다."],
     stackList: [
       "react",
@@ -120,6 +127,23 @@ export const projectListData: ProjectWrapperType[] = [
       "framer-motion",
       "ag-grid",
     ],
+    troubleShooting: [
+      {
+        title: "framer-motion을 활용한 card UI 애니메이션",
+        content:
+          "framer-motion 라이브러리를 활용하여 카드 컴포넌트에 부드러운 진입 및 퇴장 애니메이션을 구현했습니다. 이를 통해 사용자 경험을 향상시키고, UI의 동적 변화를 자연스럽게 표현할 수 있었습니다.",
+      },
+      {
+        title: "react-hook-form 데이터의 실시간 변경 감지 및 처리",
+        content:
+          "react-hook-form을 사용하여 폼 데이터의 실시간 변경을 감지하고, 데이터 변경에 따른 현 화면에 대한 상황을 즉각적으로 반영하도록 구현했습니다.",
+      },
+      {
+        title: "filter 영역 컴포넌트의 재사용성 향상",
+        content:
+          "filter 영역 컴포넌트를 재사용 가능한 형태로 설계했습니다. 제일 큰 wrapper 컴포넌트를 만들고 label, input, button 등 세부 컴포넌트를 props로 받도록 구현했습니다.",
+      },
+    ],
   },
   {
     title: "엔지니어링공제",
@@ -128,6 +152,13 @@ export const projectListData: ProjectWrapperType[] = [
       "exbuilder라는 전자정부 프레임워크를 사용해 퍼블리싱 및 공통 컴포넌트 작업을 했습니다.",
     ],
     stackList: ["java", "exbuilder", "javascript(es5)"],
+    troubleShooting: [
+      {
+        title: "전자정부 프레임워크 적응",
+        content:
+          "전자정부 프레임워크의 구조와 특성에 익숙하지 않아 초기에는 어려움이 있었으나, 공식 문서와 커뮤니티 자료를 참고하여 빠르게 적응할 수 있었습니다.",
+      },
+    ],
   },
   {
     title: "SRT",
