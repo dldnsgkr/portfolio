@@ -98,7 +98,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
             </div>
           )}
         </section>
-        <footer className="mt-6 flex justify-end">
+        <footer className="pc:mt-6 flex justify-end">
           <button
             onClick={() => setOpen(false)}
             className="mt-4 px-4 py-2 bg-primary dark:bg-primary-dark text-white rounded-md transition-colors duration-500 ease-in-out"

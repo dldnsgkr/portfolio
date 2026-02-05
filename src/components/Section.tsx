@@ -20,7 +20,7 @@ export default function Section({
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`${noPadding ? "" : "py-24"}
+      className={`${noPadding ? "" : "py-24"} mobile:py-0
         bg-background dark:bg-background-dark
         text-primary dark:text-primary-dark
         border-b border-x-slate-200 dark:border-x-slate-700

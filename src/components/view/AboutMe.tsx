@@ -4,12 +4,12 @@ const AboutMe = () => {
   return (
     <section
       id="about"
-      className="flex flex-col px-6 py-20 bg-background dark:bg-background-dark text-primary dark:text-primary-dark transition-colors duration-500 ease-in-out"
+      className="flex flex-col p-6 pc:py-20 bg-background dark:bg-background-dark text-primary dark:text-primary-dark transition-colors duration-500 ease-in-out"
     >
       <div className="max-w-3xl mx-auto text-left">
         <SectionTitle>About Me</SectionTitle>
 
-        <p className="text-lg text-muted dark:text-muted-dark mb-6 leading-relaxed transition-colors duration-500 ease-in-out">
+        <p className="pc:text-lg text-muted dark:text-muted-dark mb-6 leading-relaxed transition-colors duration-500 ease-in-out">
           안녕하세요,{" "}
           <span className="text-accent dark:text-accent-dark font-semibold transition-colors duration-500 ease-in-out">
             Jace
@@ -19,7 +19,7 @@ const AboutMe = () => {
           왔습니다.
         </p>
 
-        <p className="text-lg text-muted dark:text-muted-dark mb-6 leading-relaxed transition-colors duration-500 ease-in-out">
+        <p className="pc:text-lg text-muted dark:text-muted-dark mb-6 leading-relaxed transition-colors duration-500 ease-in-out">
           주로{" "}
           <span className="text-primary dark:text-primary-dark font-medium transition-colors duration-500 ease-in-out">
             React, TypeScript, Next.js, Tailwind CSS
@@ -29,7 +29,7 @@ const AboutMe = () => {
           생각합니다.
         </p>
 
-        <p className="text-lg text-muted dark:text-muted-dark leading-relaxed transition-colors duration-500 ease-in-out">
+        <p className="pc:text-lg text-muted dark:text-muted-dark leading-relaxed transition-colors duration-500 ease-in-out">
           기능의 핵심 흐름에는 주석을 남기고, 복잡한 로직은 최대한 분리하여 읽기
           쉬운 코드로 정리하려고 노력합니다. 이 포트폴리오는 이력서용
           결과물이자, 그동안의 고민과 학습 과정을 기록하는 공간으로 활용하고

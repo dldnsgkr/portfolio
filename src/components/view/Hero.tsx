@@ -16,7 +16,7 @@ export default function Hero() {
 
   return (
     <motion.section
-      className="min-h-screen flex flex-col justify-center items-center
+      className="pc:min-h-screen p-6 pt-20 flex flex-col justify-center items-center
         bg-background dark:bg-background-dark
         text-primary dark:text-primary-dark
         transition-colors duration-500 ease-in-out"
@@ -26,7 +26,7 @@ export default function Hero() {
     >
       <motion.h1
         variants={item}
-        className="text-5xl font-semibold mb-4 tracking-tight transition-colors duration-500 ease-in-out"
+        className="pc:text-5xl text-3xl font-semibold mb-4 tracking-tight transition-colors duration-500 ease-in-out"
       >
         Hello, I'm{" "}
         <span className="text-accent dark:text-accent-dark transition-colors duration-500 ease-in-out">
