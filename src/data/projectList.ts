@@ -193,4 +193,25 @@ export const toyProjectListData: ProjectWrapperType[] = [
     stackList: ["spring", "java", "mybatis", "oracle DB"],
     troubleShooting: [],
   },
+  {
+    title: "Eclectic Explorations",
+    description: "velog copycat 프로젝트",
+    contentText: [
+      "javascript 라이브러리인 koa.js를 활용한 백엔드 담당",
+      "vue framework를 활용한 프론트엔드 담당",
+    ],
+    stackList: ["koa.js", "vue", "javascript", "mysql", "scss"],
+    troubleShooting: [
+      {
+        title: "Transtion 태그를 이용한 애니메이션 처리",
+        content:
+          "vue의 transition 태그를 활용하여 컴포넌트 간 전환 애니메이션을 구현했습니다. 이를 통해 사용자에게 자연스러운 UI 전환 경험을 제공할 수 있었습니다.",
+      },
+      {
+        title: "typescript 7 경로 설정 이슈",
+        content:
+          "TypeScript 7 환경에서 기존에 사용하던 경로 alias 설정이 정상적으로 동작하지 않는 문제를 겪었습니다.원인은 baseUrl 없이 paths를 사용하면서 ts-node 실행 시 런타임에서 모듈을 해석하지 못한 데 있었습니다. tsconfig.json에서 rootDir를 명확히 지정하고, tsconfig-paths를 적용하고, paths를 src 기준으로 재정의하여 컴파일 타임과 런타임 모두에서 모듈 alias가 일관되게 해석되도록 설정을 수정했습니다.",
+      },
+    ],
+  },
 ];
