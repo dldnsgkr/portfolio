@@ -11,7 +11,6 @@ const Header = () => {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("theme");
-      console.log(saved);
       if (saved === "dark") return true;
       if (saved === "light") return false;
       // default: prefers-color-scheme

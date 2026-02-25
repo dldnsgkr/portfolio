@@ -23,16 +23,14 @@ export default function App() {
         Object.entries(sectionRefs.current).map(([key, el]) => [
           key,
           el ? el.offsetTop : 0,
-        ])
+        ]),
       );
 
       // 👇 여기서 원하는 로직 수행 (예: 현재 섹션 감지)
-      const currentSection = Object.entries(positions).reduce(
+      Object.entries(positions).reduce(
         (closest, [key, pos]) => (scrollY >= pos - 200 ? key : closest), // 약간의 오차 허용
-        "hero"
+        "hero",
       );
-
-      console.log("현재 섹션:", currentSection);
     }, 150); // 150ms 단위로 제한
 
     window.addEventListener("scroll", handleScroll);
