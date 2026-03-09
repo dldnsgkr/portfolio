@@ -3,6 +3,7 @@ import chart1 from "@/assets/image/chart1.png";
 import chart2 from "@/assets/image/chart2.png";
 import chart3 from "@/assets/image/chart3.png";
 import chart4 from "@/assets/image/chart4.png";
+import heartField1 from "@/assets/image/heartfield1.png";
 
 export const projectListData: ProjectWrapperType[] = [
   {
@@ -51,11 +52,13 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "HeartField",
-    description: "첫번째 정식 main project(webview)",
+    description:
+      "운동 관련 상품 판매와 사용자 간 채팅 및 소통 기능을 포함한 커머스 플랫폼",
     contentText: [
       "next.js 기반 web view 화면 작업했습니다.",
       "toss payments, kgmobiliance(결제 및 본인인증) 연동 작업했습니다.",
     ],
+    imageList: [heartField1],
     stackList: [
       "tosspaymentsSDK",
       "next.js",
@@ -84,7 +87,7 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "Hectofinancial",
-    description: "시작부터 함께한 첫 프로젝트",
+    description: "폐기물 처리 관련 서비스를 위한 사용자 및 관리자 관리 시스템",
     contentText: [
       "react 기반의 공통컴포넌트 구축 작업을 했습니다.",
       "UI 특성 별로 layout component를 구분",
@@ -110,8 +113,11 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "etevers",
-    description: "첫 대규모 프로젝트 및 ag-grid 경험",
-    contentText: ["react 기반의 공통컴포넌트 구축 작업을 했습니다."],
+    description: "상품 수주 및 발주를 관리하는 기업 내부 운영 시스템",
+    contentText: [
+      "ag-grid 기반 데이터 테이블 UI 구현",
+      "공통 컴포넌트 및 폼 관리 로직 구현",
+    ],
     stackList: [
       "react",
       "typescript",
@@ -147,7 +153,7 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "엔지니어링공제",
-    description: "전자정부 프레임워크 첫 경험",
+    description: "단순 퍼블",
     contentText: [
       "exbuilder라는 전자정부 프레임워크를 사용해 퍼블리싱 및 공통 컴포넌트 작업을 했습니다.",
     ],
@@ -162,7 +168,7 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "SRT",
-    description: "퍼블리싱 및 svg를 극한으로 활용",
+    description: "SRT 홈페이지 및 앱의 웹뷰 퍼블리싱",
     contentText: [
       "SVG를 활용해 SRT 노선도를 그려봤습니다.",
       "순수 html, js, css 만을 사용해서 작업했습니다.",

@@ -26,7 +26,7 @@ export default function App() {
         ]),
       );
 
-      // 👇 여기서 원하는 로직 수행 (예: 현재 섹션 감지)
+      // 여기서 원하는 로직 수행 (예: 현재 섹션 감지)
       Object.entries(positions).reduce(
         (closest, [key, pos]) => (scrollY >= pos - 200 ? key : closest), // 약간의 오차 허용
         "hero",
