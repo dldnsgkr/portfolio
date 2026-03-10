@@ -43,7 +43,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
       {/* portal modal */}
       <ProjectModal open={open} onClose={() => setOpen(false)}>
         <header className="mb-4">
-          <h3 className="text-2xl font-semibold text-primary dark:text-primary-dark transition-colors duration-500">
+          <h3 className="text-2xl font-semibold text-primary transition-colors duration-500">
             {title}
           </h3>
           <p className="mt-2 text-muted dark:text-muted-dark transition-colors duration-500">
@@ -68,7 +68,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
           </div>
           <div className="flex flex-col gap-2">
             <span>담당 역할 및 주요 구현 기능</span>
-            <ul className="ml-2 list-disc pl-5 text-muted dark:text-muted-dark marker:text-primary dark:marker:text-primary-dark">
+            <ul className="ml-2 list-disc pl-5 text-muted marker:text-primary dark:marker:text-primary-dark">
               {contentText.map((text, index) => (
                 <li key={index}>{text}</li>
               ))}
@@ -77,7 +77,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
           {stackList && (
             <div className="flex flex-col gap-2">
               <span>기술 스택</span>
-              <div className="ml-2 pl-5 text-muted dark:text-muted-dark marker:text-primary dark:marker:text-primary-dark">
+              <div className="ml-2 pl-5 text-muted marker:text-primary dark:marker:text-primary-dark">
                 {stackList?.join(" · ")}
               </div>
             </div>
@@ -85,7 +85,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
           {troubleShooting && (
             <div className="flex flex-col gap-2">
               <span>트러블 슈팅</span>
-              <div className="ml-2 pl-5 text-muted dark:text-muted-dark marker:text-primary dark:marker:text-primary-dark">
+              <div className="ml-2 pl-5 text-muted marker:text-primary dark:marker:text-primary-dark">
                 {troubleShooting.map((item, index) => (
                   <div key={index} className="mb-2">
                     {item.title && (
@@ -101,7 +101,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
         <footer className="pc:mt-6 flex justify-end">
           <button
             onClick={() => setOpen(false)}
-            className="mt-4 px-4 py-2 bg-primary dark:bg-primary-dark text-white rounded-md transition-colors duration-500 ease-in-out"
+            className="mt-4 px-4 py-2 bg-primary text-white rounded-md transition-colors duration-500 ease-in-out"
           >
             Close
           </button>

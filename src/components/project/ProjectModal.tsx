@@ -41,7 +41,7 @@ export default function ProjectModal({
           onClick={onClose}
         >
           <motion.div
-            className="bg-surface pc:rounded-2xl pc:p-8 p-5 max-w-lg w-full pc:max-h-[80vh] h-full flex flex-col shadow-2xl"
+            className="bg-surface pc:rounded-2xl pc:p-8 p-5 pc:max-w-lg w-full pc:max-h-[80vh] h-full flex flex-col shadow-2xl"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
