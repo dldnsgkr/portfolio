@@ -14,7 +14,7 @@ const AboutMe = () => {
           <span className="text-accent dark:text-accent-dark font-semibold transition-colors duration-500 ease-in-out">
             Jace
           </span>
-          입니다. 약 4년 가까운 경력을 가진 프론트엔드 개발자로, 사용자 경험을
+          입니다. 현재 3년차 경력을 가진 프론트엔드 개발자로, 사용자 경험을
           고려한 안정적이고 유지보수 가능한 웹 애플리케이션을 만드는 데에 집중해
           왔습니다.
         </p>
