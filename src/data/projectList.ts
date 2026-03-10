@@ -4,6 +4,8 @@ import chart2 from "@/assets/image/chart2.png";
 import chart3 from "@/assets/image/chart3.png";
 import chart4 from "@/assets/image/chart4.png";
 import heartField1 from "@/assets/image/heartfield1.png";
+import eclectic1 from "@/assets/image/eclectic1.png";
+import eclectic2 from "@/assets/image/eclectic2.png";
 
 export const projectListData: ProjectWrapperType[] = [
   {
@@ -201,11 +203,12 @@ export const toyProjectListData: ProjectWrapperType[] = [
   },
   {
     title: "Eclectic Explorations",
-    description: "velog copycat 프로젝트",
+    description: "velog clone coding project",
     contentText: [
       "javascript 라이브러리인 koa.js를 활용한 백엔드 담당",
       "vue framework를 활용한 프론트엔드 담당",
     ],
+    imageList: [eclectic1, eclectic2],
     stackList: ["koa.js", "vue", "javascript", "mysql", "scss"],
     troubleShooting: [
       {
