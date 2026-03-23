@@ -67,7 +67,7 @@ const Header = () => {
 
         {/* 네비게이션 */}
         <nav className="hidden md:flex gap-8 text-sm font-medium items-center">
-          {["Hero", "About", "Skills", "Projects"].map((item) => (
+          {["Hero", "About", "History", "Skills", "Projects"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}

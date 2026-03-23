@@ -8,7 +8,7 @@ import Project from "./components/view/Project";
 // import Contact from "./components/view/Contact";
 import Skills from "./components/view/Skills";
 import History from "./components/view/History";
-import Certificates from "./components/view/Certificates";
+// import Certificates from "./components/view/Certificates";
 
 export default function App() {
   const sectionRefs = useRef({

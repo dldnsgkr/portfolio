@@ -57,8 +57,8 @@ export const projectListData: ProjectWrapperType[] = [
     description:
       "운동 관련 상품 판매와 사용자 간 채팅 및 소통 기능을 포함한 커머스 플랫폼",
     contentText: [
-      "next.js 기반 web view 화면 작업했습니다.",
-      "toss payments, kgmobiliance(결제 및 본인인증) 연동 작업했습니다.",
+      "Next.js 기반 웹뷰 환경에서 사용자 화면(UI) 구현 및 페이지 구조 설계",
+      "Toss Payments, KG모빌리언스 결제 및 본인인증 연동을 통해 결제 프로세스 기능 구현",
     ],
     imageList: [heartField1],
     stackList: [
@@ -91,8 +91,8 @@ export const projectListData: ProjectWrapperType[] = [
     title: "Hectofinancial",
     description: "폐기물 처리 관련 서비스를 위한 사용자 및 관리자 관리 시스템",
     contentText: [
-      "react 기반의 공통컴포넌트 구축 작업을 했습니다.",
-      "UI 특성 별로 layout component를 구분",
+      "재사용성을 고려한 React 기반 공통 컴포넌트 설계 및 구축",
+      "UI 특성에 따라 Layout 컴포넌트를 분리하여 화면 구조의 일관성과 유지보수성 개선",
     ],
     stackList: [
       "next.js",
@@ -115,10 +115,11 @@ export const projectListData: ProjectWrapperType[] = [
   },
   {
     title: "etevers",
-    description: "상품 수주 및 발주를 관리하는 기업 내부 운영 시스템",
+    description:
+      "ERP와 연동된 상품 수주·발주 관리 시스템으로, Etevers 사내에서 실무자의 주문 처리 및 재고 관리를 효율화하기 위해 구축된 내부 운영 웹 애플리케이션",
     contentText: [
-      "ag-grid 기반 데이터 테이블 UI 구현",
-      "공통 컴포넌트 및 폼 관리 로직 구현",
+      "ag-grid 기반 데이터 테이블 UI 구현 및 custom excel export",
+      "재사용 가능한 공통 컴포넌트 설계 및 폼 상태 관리 로직을 구축하여 유지보수성과 개발 효율 개선",
     ],
     stackList: [
       "react",
