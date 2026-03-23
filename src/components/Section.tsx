@@ -5,10 +5,13 @@ export default function Section({
   id,
   children,
   noPadding,
+  noBorder,
 }: {
   id: string;
   children: React.ReactNode;
   noPadding?: boolean;
+  // border 아래쪽
+  noBorder?: boolean;
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
@@ -23,7 +26,7 @@ export default function Section({
       className={`${noPadding ? "" : "py-24"} mobile:py-0
         bg-background dark:bg-background-dark
         text-primary dark:text-primary-dark
-        border-b border-x-slate-200 dark:border-x-slate-700
+        border-b ${noBorder ? "border-b-0" : ""} border-x-slate-200 dark:border-x-slate-700
         transition-colors duration-500 ease-in-out`}
     >
       {children}

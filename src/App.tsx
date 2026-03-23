@@ -7,6 +7,8 @@ import AboutMe from "./components/view/AboutMe";
 import Project from "./components/view/Project";
 // import Contact from "./components/view/Contact";
 import Skills from "./components/view/Skills";
+import History from "./components/view/History";
+import Certificates from "./components/view/Certificates";
 
 export default function App() {
   const sectionRefs = useRef({
@@ -49,11 +51,19 @@ export default function App() {
           <AboutMe />
         </Section>
 
+        <Section id="history">
+          <History />
+        </Section>
+
+        {/* <Section id="certificates">
+          <Certificates />
+        </Section> */}
+
         <Section id="skills">
           <Skills />
         </Section>
 
-        <Section id="projects">
+        <Section id="projects" noBorder>
           <Project />
         </Section>
 
