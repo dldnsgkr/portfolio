@@ -14,7 +14,7 @@ export const projectListData: ProjectWrapperType[] = [
     contentText: [
       "html + chart.js를 활용한 차트 작업",
       "ajax를 활용해 동적으로 데이터를 받아와 처리하는 작업",
-      "막대 차트 및 도넛, 라인등의 여러 혼합차트를 작업 했습니다",
+      "막대 차트 및 도넛, 라인등의 여러 혼합차트 작업",
     ],
     imageList: [chart1, chart2, chart3, chart4],
     stackList: ["html", "css", "chart.js", "javascript"],
@@ -30,8 +30,8 @@ export const projectListData: ProjectWrapperType[] = [
     title: "중소기업기술정보진흥원 지능형 추천시스템 개발",
     description: "웹 크롤링 기반 데이터 수집 및 가공 자동화",
     contentText: [
-      "selenium을 활용한 크롤링 작업을 했습니다.",
-      "크롤링한 데이터를 가공하여 엑셀로 저장하는 작업을 했습니다.",
+      "selenium을 활용한 크롤링 작업",
+      "크롤링한 데이터를 가공하여 엑셀로 저장하는 작업.",
     ],
     stackList: ["python", "selenium"],
     troubleShooting: [
@@ -116,7 +116,7 @@ export const projectListData: ProjectWrapperType[] = [
   {
     title: "etevers",
     description:
-      "ERP와 연동된 상품 수주·발주 관리 시스템으로, Etevers 사내에서 실무자의 주문 처리 및 재고 관리를 효율화하기 위해 구축된 내부 운영 웹 애플리케이션",
+      "상품 수주·발주 관리 시스템으로, Etevers 사내에서 실무자의 주문 처리 및 재고 관리를 효율화하기 위해 구축된 내부 운영 웹 애플리케이션",
     contentText: [
       "ag-grid 기반 데이터 테이블 UI 구현 및 custom excel export",
       "재사용 가능한 공통 컴포넌트 설계 및 폼 상태 관리 로직을 구축하여 유지보수성과 개발 효율 개선",
@@ -163,9 +163,9 @@ export const projectListData: ProjectWrapperType[] = [
     stackList: ["java", "exbuilder", "javascript(es5)"],
     troubleShooting: [
       {
-        title: "전자정부 프레임워크 적응",
+        title: "동적 grid 조작",
         content:
-          "전자정부 프레임워크의 구조와 특성에 익숙하지 않아 초기에는 어려움이 있었으나, 공식 문서와 커뮤니티 자료를 참고하여 빠르게 적응할 수 있었습니다.",
+          "전자정부 프레임워크와 exBuilder 환경에 익숙하지 않은 상태에서, Grid의 기본 구조가 사전에 정의된 data field와 header를 기반으로 동작하는 점 때문에 동적인 데이터에 따라 row 병합 및 그룹 구조를 변경해야 하는 요구사항을 구현하는 데 어려움이 있었습니다. 공식 문서와 레퍼런스가 부족해 Grid 설정만으로는 해결이 어려웠고, exBuilder에서 제공하는 함수들을 직접 분석하고 다양한 케이스를 테스트하며 값을 적용해보는 방식으로 동적 병합 및 그룹 처리 로직을 구현했습니다.",
       },
     ],
   },
