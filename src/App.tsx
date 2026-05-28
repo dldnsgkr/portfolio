@@ -8,6 +8,7 @@ import Project from "./components/view/Project";
 // import Contact from "./components/view/Contact";
 import Skills from "./components/view/Skills";
 import History from "./components/view/History";
+import CoverLetter from "./components/view/CoverLetter";
 // import Certificates from "./components/view/Certificates";
 
 export default function App() {
@@ -49,6 +50,10 @@ export default function App() {
 
         <Section id="about">
           <AboutMe />
+        </Section>
+
+        <Section id="cover">
+          <CoverLetter />
         </Section>
 
         <Section id="history">

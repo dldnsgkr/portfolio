@@ -10,11 +10,16 @@ export default function ProjectCard(props: ProjectWrapperType) {
   const {
     title,
     description,
+    period,
     contentText,
     imageList,
     stackList,
     troubleShooting,
   } = props;
+
+  const periodText = period
+    ? `${period.start} ~ ${period.end ?? "진행중"}`
+    : null;
 
   return (
     <motion.div
@@ -37,6 +42,11 @@ export default function ProjectCard(props: ProjectWrapperType) {
       <h3 className="text-xl font-semibold break-keep text-primary dark:text-primary-dark mb-2 transition-colors duration-500 ease-in-out">
         {title}
       </h3>
+      {periodText && (
+        <p className="text-xs text-muted dark:text-muted-dark mb-1 transition-colors duration-500 ease-in-out">
+          {periodText}
+        </p>
+      )}
       <p className="text-muted dark:text-muted-dark transition-colors duration-500 ease-in-out">
         {description}
       </p>
@@ -46,6 +56,11 @@ export default function ProjectCard(props: ProjectWrapperType) {
           <h3 className="text-2xl font-semibold text-primary transition-colors duration-500">
             {title}
           </h3>
+          {periodText && (
+            <p className="mt-1 text-xs text-muted dark:text-muted-dark transition-colors duration-500">
+              {periodText}
+            </p>
+          )}
           <p className="mt-2 text-muted dark:text-muted-dark transition-colors duration-500">
             {description}
           </p>

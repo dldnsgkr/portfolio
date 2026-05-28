@@ -30,14 +30,16 @@ export default function Hero() {
       >
         Hello, I'm{" "}
         <span className="text-accent dark:text-accent-dark transition-colors duration-500 ease-in-out">
-          Frontend Developer
+          Full Stack Developer
         </span>
       </motion.h1>
       <motion.p
         variants={item}
-        className="text-muted dark:text-muted-dark text-lg mb-8 max-w-md text-center transition-colors duration-500 ease-in-out"
+        className="text-muted dark:text-muted-dark text-lg mb-8 max-w-lg text-center transition-colors duration-500 ease-in-out"
       >
-        I craft clean and modern user interfaces with React and modern web tech.
+        UI부터 API까지,
+        <br />
+        서비스의 처음과 끝을 만듭니다.
       </motion.p>
     </motion.section>
   );

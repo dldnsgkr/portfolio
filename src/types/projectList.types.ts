@@ -2,6 +2,11 @@ export type ProjectWrapperType = {
   title: string;
   // project의 핵심 간단 설명
   description: string;
+  // 진행 기간 (start: 시작월, end: 종료월 — 생략 시 진행중)
+  period?: {
+    start: string;
+    end?: string;
+  };
   // 서문 및 주요 작업 기능
   contentText: string[];
   // image list

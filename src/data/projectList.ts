@@ -56,6 +56,10 @@ export const projectListData: ProjectWrapperType[] = [
     title: "HeartField",
     description:
       "운동 관련 상품 판매와 사용자 간 채팅 및 소통 기능을 포함한 커머스 플랫폼",
+    period: {
+      start: "2024.06",
+      end: "2025.12",
+    },
     contentText: [
       "Next.js 기반 웹뷰 환경에서 사용자 화면(UI) 구현 및 페이지 구조 설계",
       "Toss Payments, KG모빌리언스 결제 및 본인인증 연동을 통해 결제 프로세스 기능 구현",
@@ -117,6 +121,10 @@ export const projectListData: ProjectWrapperType[] = [
     title: "etevers",
     description:
       "상품 수주·발주 관리 시스템으로, Etevers 사내에서 실무자의 주문 처리 및 재고 관리를 효율화하기 위해 구축된 내부 운영 웹 애플리케이션",
+    period: {
+      start: "2025.02",
+      end: "2025.09",
+    },
     contentText: [
       "ag-grid 기반 데이터 테이블 UI 구현 및 custom excel export",
       "재사용 가능한 공통 컴포넌트 설계 및 폼 상태 관리 로직을 구축하여 유지보수성과 개발 효율 개선",
@@ -221,6 +229,84 @@ export const toyProjectListData: ProjectWrapperType[] = [
         title: "typescript 7 경로 설정 이슈",
         content:
           "TypeScript 7 환경에서 기존에 사용하던 경로 alias 설정이 정상적으로 동작하지 않는 문제를 겪었습니다.원인은 baseUrl 없이 paths를 사용하면서 ts-node 실행 시 런타임에서 모듈을 해석하지 못한 데 있었습니다. tsconfig.json에서 rootDir를 명확히 지정하고, tsconfig-paths를 적용하고, paths를 src 기준으로 재정의하여 컴파일 타임과 런타임 모두에서 모듈 alias가 일관되게 해석되도록 설정을 수정했습니다.",
+      },
+    ],
+  },
+  {
+    title: "Stock Signal",
+    description:
+      "미국·한국 주식 시장 데이터를 자동 수집하고 5가지 팩터 스코어링 엔진으로 BUY/WATCH/AVOID 투자 시그널을 생성하는 분석 플랫폼",
+    period: {
+      start: "2026.05",
+    },
+    contentText: [
+      "Claude Code를 활용한 바이브 코딩 방식으로 개발",
+      "Turborepo 기반 모노레포 구조로 Next.js 프론트엔드, NestJS REST API, FastAPI 분석 서비스 3개 앱 설계 및 구축",
+      "yfinance 주가 수집, VADER 감성 분석 기반 뉴스 처리, 재무지표·거시경제 데이터 수집 파이프라인 구현",
+      "기술적(35%), 기본적(25%), 뉴스(20%), 거시경제(10%), 플로우(10%) 5팩터 가중 스코어링 엔진으로 시그널 생성",
+      "BullMQ 기반 비동기 잡 큐 아키텍처(8개 큐)로 데이터 수집·시그널 생성·성과 평가 파이프라인 자동화",
+    ],
+    stackList: [
+      "next.js",
+      "typescript",
+      "nestjs",
+      "fastapi",
+      "python",
+      "postgresql",
+      "redis",
+      "prisma",
+      "bullmq",
+      "turborepo",
+      "tailwindcss",
+      "echarts",
+      "docker",
+    ],
+    troubleShooting: [
+      {
+        title: "장기 실행 배치 잡의 BullMQ Lock 만료 문제",
+        content:
+          "데이터 수집 배치 잡이 실행 도중 Lock이 만료되어 동일 잡이 중복 실행되는 문제가 발생했습니다. 주가·뉴스·재무 데이터를 순차 수집하는 파이프라인 특성상 단일 잡이 5분 이상 소요되는 경우가 있었기 때문입니다. Lock duration을 5분으로 설정하고 2분마다 갱신하는 방식으로 장기 실행 잡에서도 중복 실행 없이 안정적으로 처리되도록 개선했습니다.",
+      },
+      {
+        title: "Feature Engineering 시 데이터 부족 구간 처리",
+        content:
+          "이동평균(MA20/MA60) 및 모멘텀 지표 계산 시 상장 초기 종목이나 데이터 수집 직후 종목에서 NaN·Inf 값이 발생해 스코어 계산이 중단되는 문제가 있었습니다. 최소 20일치 가격 데이터를 보유한 종목만 분석 대상으로 제한하고, 피처 추출 단계에서 NaN·Inf를 안전하게 처리하는 가드 로직을 추가하여 안정적인 스코어 산출이 가능하도록 개선했습니다.",
+      },
+      {
+        title: "모노레포 환경에서 서비스 간 타입 공유",
+        content:
+          "Next.js, NestJS 두 TypeScript 서비스가 동일한 도메인 타입(주식, 추천, 성과)을 각자 정의하면서 타입 불일치 문제가 반복됐습니다. shared-types 패키지를 pnpm workspace 내에 별도로 구성하고 두 앱이 공통 타입을 import하도록 구조를 변경하여 타입 일관성을 확보하고 중복 정의를 제거했습니다.",
+      },
+    ],
+  },
+  {
+    title: "UMC Practice Project",
+    description:
+      "UMC 스터디 기간중 학습과 함께 응용 하면서 작업한 프로젝트입니다.",
+    contentText: [
+      "react, spring boot를 이용한 풀스택 프로젝트",
+      "spring boot 파트를 학습하는 용도로 제공된 figma 기반으로 front 추가 작업",
+    ],
+    imageList: [],
+    stackList: [
+      "react19",
+      "javascript",
+      "typescript",
+      "framer-motion",
+      "spring boot",
+      "java",
+      "JPA",
+      "mysql",
+    ],
+    troubleShooting: [
+      {
+        title: "framer-motion을 활용한 전반적인 UI 전환",
+        content: "",
+      },
+      {
+        title: "공통 stack형 modal 구조 설립",
+        content:
+          "기존에 zustand로 전체 상태관리 했는데 provider, context를 써서 처음으로 stack형 modal 구조 작성",
       },
     ],
   },
