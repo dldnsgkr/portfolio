@@ -199,6 +199,51 @@ export const projectListData: ProjectWrapperType[] = [
 
 export const toyProjectListData: ProjectWrapperType[] = [
   {
+    title: "Newsift",
+    description:
+      "UMC에서 만난 팀원들과 함께(팀명: 502) 개발한 AI 뉴스 큐레이터 앱으로, speckit·pre-commit·Taskfile·CLAUDE.md 기반 개발 하네스 엔지니어링을 중점으로 진행한 프로젝트",
+    period: {
+      start: "2026.06",
+    },
+    contentText: [
+      "RSS·Naver API 기반 뉴스 수집 파이프라인 구현",
+      "이메일 인증 2단계 회원가입, JWT 발급, 소셜 OAuth(Kakao·Google·Apple) 연동",
+      "3-factor 랭킹 + keyset 커서 페이지네이션 기반 개인화 피드 구현",
+      "pg_bigm 유사도 기반 기사 검색 + 기사 저장(멱등 save/unsave, 1000건 상한) 구현",
+      "AWS Polly 기반 기사 TTS 비동기 생성·S3 저장·데일리 브리핑 큐 구현",
+      "GitHub Actions CI/CD 파이프라인 구성 및 EC2 배포 자동화",
+      "speckit(spec·plan·tasks 문서화 도구), pre-commit 훅, Taskfile, CLAUDE.md를 조합한 개발 하네스 구축으로 팀 전체 워크플로우 표준화",
+      "프론트 초기 라우팅·인증 골격 설계 — 가드 5종(ProtectedRoute·GuestOnlyRoute·GateRoute·AdminRoute·AuthShell), 역할 기반 레이아웃(User GNB / Admin Sidebar) 분리, 토큰 갱신 구조 수립",
+    ],
+    stackList: [
+      "spring boot",
+      "java",
+      "spring security",
+      "jpa",
+      "postgresql",
+      "flyway",
+      "aws s3",
+      "aws polly",
+      "gemini",
+      "react",
+      "typescript",
+      "react-router-dom",
+      "zustand",
+    ],
+    troubleShooting: [
+      {
+        title: "소셜 신규 가입 시 약관 동의 수집 흐름 설계",
+        content:
+          "소셜 로그인으로 신규 가입하는 사용자의 경우, OAuth 콜백 직후 바로 JWT를 발급하면 약관 동의를 수집할 수 없는 문제가 있었습니다. 이를 해결하기 위해 콜백 시점에 정식 JWT 대신 pending-token을 발급하고, 프론트에서 약관 동의 화면을 거친 뒤 /complete 엔드포인트를 호출해 정식 JWT를 발급하는 2단계 플로우로 전환했습니다.",
+      },
+      {
+        title: "공통 응답 형태 통일 및 테스트 대응",
+        content:
+          "각 엔드포인트마다 응답 구조가 달라 프론트와의 인터페이스가 불일치하는 문제가 있었습니다. ApiResponse<T> 래퍼(code·status·message·data 4-필드)로 전체 응답 형태를 통일하고, 기존 통합 테스트의 응답 파싱 로직도 일괄 수정하여 CI가 안정적으로 통과되도록 했습니다.",
+      },
+    ],
+  },
+  {
     title: "UPDEV",
     description: "게시판 기반 웹사이트",
     contentText: [
