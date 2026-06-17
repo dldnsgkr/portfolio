@@ -83,11 +83,14 @@ export default function ProjectCard(props: ProjectWrapperType) {
           </div>
           <div className="flex flex-col gap-2">
             <span>담당 역할 및 주요 구현 기능</span>
-            <ul className="ml-2 list-disc pl-5 text-muted marker:text-primary dark:marker:text-primary-dark">
+            <div className="flex flex-col gap-1">
               {contentText.map((text, index) => (
-                <li key={index}>{text}</li>
+                <div key={index} className="flex gap-2 text-muted dark:text-muted-dark transition-colors duration-500">
+                  <span className="text-primary shrink-0 mt-0.5">•</span>
+                  <span>{text}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
           {stackList && (
             <div className="flex flex-col gap-2">
