@@ -15,6 +15,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
     imageList,
     stackList,
     troubleShooting,
+    deployLink,
   } = props;
 
   const periodText = period
@@ -116,7 +117,19 @@ export default function ProjectCard(props: ProjectWrapperType) {
             </div>
           )}
         </section>
-        <footer className="pc:mt-6 flex justify-end">
+        <footer className="pc:mt-6 flex justify-between items-center">
+          {deployLink ? (
+            <a
+              href={deployLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 px-4 py-2 bg-accent text-white rounded-md text-sm transition-colors duration-500 ease-in-out hover:opacity-80"
+            >
+              배포 링크 →
+            </a>
+          ) : (
+            <span />
+          )}
           <button
             onClick={() => setOpen(false)}
             className="mt-4 px-4 py-2 bg-primary text-white rounded-md transition-colors duration-500 ease-in-out"

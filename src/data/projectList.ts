@@ -289,6 +289,7 @@ export const toyProjectListData: ProjectWrapperType[] = [
       start: "2026.05",
     },
     imageList: [stockSignal1, stockSignal2, stockSignal3, stockSignal4],
+    deployLink: "https://stock-signal-frontend-two.vercel.app/",
     contentText: [
       "Claude Code를 활용한 바이브 코딩 방식으로 개발",
       "Turborepo 기반 모노레포 구조로 Next.js 프론트엔드, NestJS REST API, FastAPI 분석 서비스 3개 앱 설계 및 구축",

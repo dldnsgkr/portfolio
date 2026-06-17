@@ -13,6 +13,8 @@ export type ProjectWrapperType = {
   imageList?: string[];
   // git 주소
   gitLink?: string;
+  // 배포 주소
+  deployLink?: string;
   // 사용된 기술 스택
   stackList?: string[];
   // 문제 발생 및 해결 과정
