@@ -6,6 +6,10 @@ import chart4 from "@/assets/image/chart4.png";
 import heartField1 from "@/assets/image/heartfield1.png";
 import eclectic1 from "@/assets/image/eclectic1.png";
 import eclectic2 from "@/assets/image/eclectic2.png";
+import stockSignal1 from "@/assets/image/stocksignal1.png";
+import stockSignal2 from "@/assets/image/stocksignal2.png";
+import stockSignal3 from "@/assets/image/stocksignal3.png";
+import stockSignal4 from "@/assets/image/stocksignal4.png";
 
 export const projectListData: ProjectWrapperType[] = [
   {
@@ -284,6 +288,7 @@ export const toyProjectListData: ProjectWrapperType[] = [
     period: {
       start: "2026.05",
     },
+    imageList: [stockSignal1, stockSignal2, stockSignal3, stockSignal4],
     contentText: [
       "Claude Code를 활용한 바이브 코딩 방식으로 개발",
       "Turborepo 기반 모노레포 구조로 Next.js 프론트엔드, NestJS REST API, FastAPI 분석 서비스 3개 앱 설계 및 구축",
