@@ -5,8 +5,40 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>이운학의 포트폴리오</title>
+
+    <link
+      rel="preload"
+      href="/fonts/pretendard-subset.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-subset.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- 첫 페인트 전에 테마를 확정한다. React 마운트를 기다리면 라이트 화면이 한 번 번쩍인다.
+         키는 Header.tsx 의 localStorage("theme") 와 동일하다. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var dark =
+            saved === "dark" ||
+            (saved === null &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          if (dark) document.documentElement.classList.add("dark");
+        } catch (e) {
+          /* localStorage 차단 환경 — 기본 테마로 둔다 */
+        }
+      })();
+    </script>
   </head>
-  <body class="bg-background dark:bg-background-dark">
+  <body class="bg-background">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

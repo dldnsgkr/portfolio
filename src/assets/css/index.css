@@ -1,9 +1,83 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ------------------------------------------------------------------
+ * 웹폰트 — 자체 호스팅 서브셋
+ * 외부 CDN 을 타지 않는다. 재생성 방법은 public/fonts/README.md 참고.
+ * ------------------------------------------------------------------ */
+@font-face {
+  font-family: "Pretendard Variable";
+  src: url("/fonts/pretendard-subset.woff2") format("woff2");
+  font-weight: 45 930;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-subset.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------------
+ * 컬러 토큰
+ * 채널값(R G B)으로 두어야 Tailwind 의 /50 같은 alpha 수식이 동작한다.
+ * 라이트/다크가 같은 변수를 덮어쓰므로 컴포넌트에는 dark: 중복이 없다.
+ * ------------------------------------------------------------------ */
+:root {
+  --bg: 241 243 239; /* #F1F3EF */
+  --surface: 251 252 250; /* #FBFCFA */
+  --line: 216 222 212; /* #D8DED4 */
+  --text: 22 33 28; /* #16211C */
+  --muted: 85 99 92; /* #55635C */
+  --accent: 111 90 34; /* #6F5A22 */
+
+  color-scheme: light;
+  font-optical-sizing: auto; /* Fraunces 의 opsz 축을 크기에 따라 자동 적용 */
+}
+
+.dark {
+  --bg: 16 25 21; /* #101915 */
+  --surface: 23 35 29; /* #17231D */
+  --line: 42 58 50; /* #2A3A32 */
+  --text: 242 239 230; /* #F2EFE6 */
+  --muted: 154 170 161; /* #9AAAA1 */
+  --accent: 198 166 100; /* #C6A664 */
+
+  color-scheme: dark;
+}
+
 @layer base {
   html {
     @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-primary font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 테마 전환은 개별 요소에 붙이지 않고 여기서 한 번만 처리한다.
+     (요소마다 transition-colors duration-500 을 복붙하던 것을 대체) */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, fill, stroke,
+      text-decoration-color, outline-color;
+    transition-duration: 180ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms;
+    }
   }
 }
 

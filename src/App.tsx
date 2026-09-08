@@ -43,12 +43,13 @@ export default function App() {
   return (
     <>
       <Header />
-      <main className="min-h-screen transition-colors duration-500 ease-in-out bg-background dark:bg-background-dark text-primary dark:text-primary-dark">
-        <Section id="hero" noPadding>
+      <main className="min-h-screen text-primary">
+        {/* 배경 톤을 bg / surface 로 번갈아 주어 섹션 리듬을 만든다 */}
+        <Section id="hero" fullHeight>
           <Hero />
         </Section>
 
-        <Section id="about">
+        <Section id="about" tone="surface">
           <AboutMe />
         </Section>
 
@@ -56,7 +57,7 @@ export default function App() {
           <CoverLetter />
         </Section>
 
-        <Section id="history">
+        <Section id="history" tone="surface">
           <History />
         </Section>
 
@@ -68,7 +69,7 @@ export default function App() {
           <Skills />
         </Section>
 
-        <Section id="projects" noBorder>
+        <Section id="projects" tone="surface">
           <Project />
         </Section>
 

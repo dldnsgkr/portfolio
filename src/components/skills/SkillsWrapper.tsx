@@ -34,7 +34,7 @@ const SkillsWrapper = ({
                   className="w-9 h-9 pointer-events-none pc:grayscale pc:opacity-70 transition-all duration-300 ease-in-out group-hover:grayscale-0 group-hover:opacity-100"
                 />
               ) : (
-                <span className="w-9 h-9 flex items-center justify-center text-xs font-mono font-semibold">
+                <span className="w-9 h-9 flex items-center justify-center text-xs font-semibold">
                   {skillObj.name}
                 </span>
               )}

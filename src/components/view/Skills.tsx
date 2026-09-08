@@ -4,7 +4,7 @@ import SkillsWrapper from "../skills/SkillsWrapper";
 
 const Skills = () => {
   return (
-    <section className="min-h-screen flex flex-col p-6">
+    <div>
       <SectionTitle children="Skills" />
       <div className="flex flex-col lg:flex-row gap-6">
         <SkillsWrapper
@@ -20,7 +20,7 @@ const Skills = () => {
           skillList={experienceStacksData.skillList}
         />
       </div>
-    </section>
+    </div>
   );
 };
 

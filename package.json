@@ -11,7 +11,8 @@
     "update:browsers": "npx update-browserslist-db@latest",
     "preview": "vite preview",
     "deploy": "node scripts/predeploy.mjs && vite build && gh-pages -d dist",
-    "typecheck": "tsc -p tsconfig.app.json --noEmit"
+    "typecheck": "tsc -p tsconfig.app.json --noEmit",
+    "fonts:check": "node scripts/check-font-charset.mjs"
   },
   "browserslist": {
     "production": [

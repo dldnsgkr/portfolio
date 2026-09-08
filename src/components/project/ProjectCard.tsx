@@ -26,7 +26,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
     <motion.div
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-6 shadow-sm hover:shadow-md cursor-pointer transition-colors duration-500 ease-in-out"
+      className="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-md cursor-pointer"
       onClick={() => setOpen(true)}
     >
       {imageList && imageList.length > 0 ? (
@@ -40,29 +40,29 @@ export default function ProjectCard(props: ProjectWrapperType) {
           이미지가 없는 프로젝트입니다
         </div>
       )}
-      <h3 className="text-xl font-semibold break-keep text-primary dark:text-primary-dark mb-2 transition-colors duration-500 ease-in-out">
+      <h3 className="text-xl font-semibold break-keep text-primary mb-2">
         {title}
       </h3>
       {periodText && (
-        <p className="text-xs text-muted dark:text-muted-dark mb-1 transition-colors duration-500 ease-in-out">
+        <p className="text-xs text-muted mb-1">
           {periodText}
         </p>
       )}
-      <p className="text-muted dark:text-muted-dark transition-colors duration-500 ease-in-out">
+      <p className="text-muted">
         {description}
       </p>
       {/* portal modal */}
       <ProjectModal open={open} onClose={() => setOpen(false)}>
         <header className="mb-4">
-          <h3 className="text-2xl font-semibold text-primary transition-colors duration-500">
+          <h3 className="text-2xl font-semibold text-primary">
             {title}
           </h3>
           {periodText && (
-            <p className="mt-1 text-xs text-muted dark:text-muted-dark transition-colors duration-500">
+            <p className="mt-1 text-xs text-muted">
               {periodText}
             </p>
           )}
-          <p className="mt-2 text-muted dark:text-muted-dark transition-colors duration-500">
+          <p className="mt-2 text-muted">
             {description}
           </p>
         </header>
@@ -86,7 +86,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
             <span>담당 역할 및 주요 구현 기능</span>
             <div className="flex flex-col gap-1">
               {contentText.map((text, index) => (
-                <div key={index} className="flex gap-2 text-muted dark:text-muted-dark transition-colors duration-500">
+                <div key={index} className="flex gap-2 text-muted">
                   <span className="text-primary shrink-0 mt-0.5">•</span>
                   <span>{text}</span>
                 </div>
@@ -96,7 +96,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
           {stackList && (
             <div className="flex flex-col gap-2">
               <span>기술 스택</span>
-              <div className="ml-2 pl-5 text-muted marker:text-primary dark:marker:text-primary-dark">
+              <div className="ml-2 pl-5 text-muted marker:text-primary">
                 {stackList?.join(" · ")}
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
           {troubleShooting && (
             <div className="flex flex-col gap-2">
               <span>트러블 슈팅</span>
-              <div className="ml-2 pl-5 text-muted marker:text-primary dark:marker:text-primary-dark">
+              <div className="ml-2 pl-5 text-muted marker:text-primary">
                 {troubleShooting.map((item, index) => (
                   <div key={index} className="mb-2">
                     {item.title && (
@@ -123,7 +123,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
               href={deployLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 px-4 py-2 bg-accent text-white rounded-md text-sm transition-colors duration-500 ease-in-out hover:opacity-80"
+              className="mt-4 px-4 py-2 bg-accent text-white rounded-md text-sm hover:opacity-80"
             >
               배포 링크 →
             </a>
@@ -132,7 +132,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
           )}
           <button
             onClick={() => setOpen(false)}
-            className="mt-4 px-4 py-2 bg-primary text-white rounded-md transition-colors duration-500 ease-in-out"
+            className="mt-4 px-4 py-2 bg-primary text-white rounded-md"
           >
             Close
           </button>
