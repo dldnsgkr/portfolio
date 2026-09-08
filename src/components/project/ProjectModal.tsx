@@ -1,15 +1,7 @@
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-
-const FOCUSABLE = [
-  "a[href]",
-  "button:not([disabled])",
-  "textarea:not([disabled])",
-  "input:not([disabled])",
-  "select:not([disabled])",
-  '[tabindex]:not([tabindex="-1"])',
-].join(",");
+import { useModalDialog } from "@/lib/useModalDialog";
 
 export default function ProjectModal({
   open,
@@ -25,74 +17,14 @@ export default function ProjectModal({
 }) {
   const [mounted, setMounted] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
-  // 열기 직전 포커스를 갖고 있던 요소 — 닫을 때 여기로 되돌린다
-  const triggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (!open) return;
-
-    triggerRef.current = document.activeElement as HTMLElement | null;
-
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const focusables = () => {
-      const panel = panelRef.current;
-      if (!panel) return [] as HTMLElement[];
-      return Array.from(
-        panel.querySelectorAll<HTMLElement>(FOCUSABLE),
-        // 숨겨진 요소는 제외
-      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
-    };
-
-    // 열릴 때 첫 포커스 가능한 요소로. 없으면 패널 자체로.
-    const raf = requestAnimationFrame(() => {
-      const [first] = focusables();
-      (first ?? panelRef.current)?.focus();
-    });
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.stopPropagation();
-        onClose();
-        return;
-      }
-      if (e.key !== "Tab") return;
-
-      // 포커스 트랩 — Tab 이 패널 밖으로 나가지 않게 순환시킨다
-      const list = focusables();
-      if (list.length === 0) {
-        e.preventDefault();
-        panelRef.current?.focus();
-        return;
-      }
-      const first = list[0];
-      const last = list[list.length - 1];
-      const active = document.activeElement;
-
-      if (e.shiftKey && (active === first || active === panelRef.current)) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && active === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown, true);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      document.removeEventListener("keydown", handleKeyDown, true);
-      document.body.style.overflow = originalOverflow;
-      // 닫힐 때 트리거로 복귀
-      triggerRef.current?.focus?.();
-    };
-  }, [open, onClose]);
+  // body 스크롤 잠금 / Esc / 포커스 트랩 / 첫 포커스 / 트리거 복귀
+  // — 모바일 네비 시트와 같은 훅을 쓴다.
+  useModalDialog(open, onClose, panelRef);
 
   if (!mounted) return null;
 
