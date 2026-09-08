@@ -6,7 +6,7 @@ const Project = () => {
   return (
     <div>
       <SectionTitle children="Projects" />
-      <div className="flex flex-col pc:gap-10 gap-6">
+      <div className="flex flex-col gap-14">
         <ProjectWrapper
           mainTit="Work Projects"
           subTit="실무 환경에서 참여한 프로젝트"
