@@ -7,7 +7,10 @@ export default function CoverLetter() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="max-w-prose">
+    // 카드는 컨테이너 전체 폭을 쓴다. 여기에 max-w-prose 를 걸면 아래
+    // History / Skills / Projects 가 전체 폭을 쓰는 것과 어긋나 오른쪽이 빈다.
+    // 줄 길이 제한은 실제로 긴 글이 들어가는 펼친 문단에만 적용한다.
+    <div>
       <SectionTitle>Cover Letter</SectionTitle>
 
       <div className="mt-10 flex flex-col gap-4">
@@ -55,12 +58,15 @@ export default function CoverLetter() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-2 flex flex-col gap-4 border-t border-border">
-                      {item.paragraphs.map((paragraph, pIdx) => (
-                        <p key={pIdx} className="text-body text-muted">
-                          {paragraph}
-                        </p>
-                      ))}
+                    <div className="border-t border-border px-6 pb-6 pt-4">
+                      {/* 구분선은 카드 폭 전체, 본문만 68ch */}
+                      <div className="flex max-w-prose flex-col gap-4">
+                        {item.paragraphs.map((paragraph, pIdx) => (
+                          <p key={pIdx} className="text-body text-muted">
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 )}
