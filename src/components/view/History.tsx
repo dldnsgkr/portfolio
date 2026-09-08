@@ -1,120 +1,108 @@
+import clsx from "clsx";
 import SectionTitle from "../SectionTitle";
+import { historyData, type HistoryItem } from "@/data/history";
 
-type HistoryItem = {
-  date: string;
-  title: string;
-  description?: string;
-};
+// date 문자열의 시작 연월을 뽑는다.
+// 형식이 제각각이라("2014 ~ 2021", "2022.06 ~ 2023 초", "2026.02", "2026.03 ~")
+// 앞쪽의 YYYY 와 있으면 .MM 만 읽고 나머지는 무시한다.
+// 파싱 실패는 null 로 돌려 호출부가 정렬을 포기할 수 있게 한다.
+type ParsedStart = { key: number; iso: string };
 
-const historyData: HistoryItem[] = [
-  {
-    date: "2014 ~ 2021",
-    title: "골프 선수 준비",
-    description:
-      "약 7년간 골프 선수로 활동하며 목표를 향해 꾸준히 훈련하고, 자기 관리와 집중력을 기르는 경험을 쌓았습니다.",
-  },
-  {
-    date: "2022.06 ~ 2023 초",
-    title: "국비지원학원 풀스택 과정 수료",
-    description:
-      "웹 개발 전반에 대한 이론과 실습을 통해 프론트엔드를 중심으로 백엔드의 기본 개념까지 함께 익히고, 팀 프로젝트를 통해 개발 흐름과 협업 경험을 쌓았습니다.",
-  },
-  {
-    date: "2023.02 ~ 2024.01",
-    title: "SNK (safekorea)",
-    description:
-      "Chart.js를 활용하여 웹뷰에 표시되는 차트 기능을 구현했으며, Spring Boot 기반 자사 솔루션에서 데이터 처리 관련 스크립트를 수정·개선했습니다. 또한 CentOS, Ubuntu 환경에서 DB 서버를 구성하고 MySQL 및 PostgreSQL의 백업 스크립트와 운영 흐름을 구축했으며, Python을 활용한 데이터 크롤링 작업을 수행했습니다.",
-  },
-  {
-    date: "2026.02",
-    title: "학점은행제 학사 과정 수료",
-    description: "학점은행제를 통해 컴퓨터공학 학사 과정을 수료했습니다.",
-  },
-  {
-    date: "2024.03 ~ 2026.04",
-    title: "CY",
-    description:
-      "React, Next.js, TypeScript를 기반으로 프론트엔드 개발을 담당했으며, 다양한 프로젝트(Heartfield, Hecto Financial, Etevers, 엔지니어링공제, SRT 등)에 참여하여 사용자 인터페이스 구현 및 서비스 기능 개발을 수행했습니다.",
-  },
-  {
-    date: "2026.03 ~",
-    title: "동양미래대학교 야간 학사 과정 재학",
-    description:
-      "추가적인 학습을 위해 야간 학사 과정에 재학 중이며, 동아리 활동을 통해 백엔드 기술(Spring Boot)을 학습하며 프론트엔드 중심에서 풀스택 역량으로 확장하고 있습니다.",
-  },
-];
+function parseStart(date: string): ParsedStart | null {
+  const m = /^\s*(\d{4})(?:\s*[.\-/]\s*(\d{1,2}))?/.exec(date);
+  if (!m) return null;
+
+  const year = Number(m[1]);
+  const month = m[2] === undefined ? undefined : Number(m[2]);
+  if (month !== undefined && (month < 1 || month > 12)) return null;
+
+  return {
+    // 월이 없으면 0 으로 두어 같은 해에서 가장 앞에 오게 한다
+    key: year * 100 + (month ?? 0),
+    iso:
+      month === undefined
+        ? String(year)
+        : `${year}-${String(month).padStart(2, "0")}`,
+  };
+}
+
+// 최신이 위로. 하나라도 파싱에 실패하면 정렬을 포기하고 원본 순서를 쓴다
+// (일부만 정렬된 어중간한 순서가 제일 읽기 어렵다).
+function sortNewestFirst(items: HistoryItem[]) {
+  const parsed = items.map((item) => ({ item, start: parseStart(item.date) }));
+  if (parsed.some((row) => row.start === null)) {
+    if (import.meta.env.DEV) {
+      const bad = parsed
+        .filter((row) => row.start === null)
+        .map((row) => row.item.date);
+      console.warn(
+        `[History] 시작 연월 파싱 실패 — 원본 배열 순서로 렌더한다: ${bad.join(", ")}`,
+      );
+    }
+    return parsed;
+  }
+  // Array.prototype.sort 는 안정 정렬이라 같은 키는 원본 순서를 유지한다
+  return [...parsed].sort((a, b) => b.start!.key - a.start!.key);
+}
 
 const History = () => {
+  const rows = sortNewestFirst(historyData);
+
   return (
     <div>
       <SectionTitle>History</SectionTitle>
 
-        <div className="relative mt-16">
-          {/* ✅ PC 중앙 라인 */}
-          <div className="hidden pc:block absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-muted" />
+      {/* 지그재그를 버리고 좌측 단일 축으로. 6개 항목에는 지그재그가 읽는 순서만 흔든다.
+          연월은 축 왼쪽, 제목·설명은 축 오른쪽. */}
+      <ol className="mt-14">
+        {rows.map(({ item, start }, idx) => {
+          const isLast = idx === rows.length - 1;
 
-          {/* ✅ 모바일 라인 */}
-          <div className="pc:hidden absolute left-3 top-0 bottom-0 w-[2px] bg-muted" />
+          return (
+            <li
+              key={`${item.date}-${item.title}`}
+              className="grid grid-cols-[4.75rem_1fr] pc:grid-cols-[7.5rem_1fr]"
+            >
+              {start ? (
+                <time
+                  dateTime={start.iso}
+                  className="pr-5 pt-px text-right text-small tabular-nums text-muted"
+                >
+                  {item.date}
+                </time>
+              ) : (
+                <span className="pr-5 pt-px text-right text-small tabular-nums text-muted">
+                  {item.date}
+                </span>
+              )}
 
-          <div className="flex flex-col gap-16">
-            {historyData.map((item, idx) => {
-              const isLeft = idx % 2 === 0;
+              <div
+                className={clsx(
+                  // 축은 이 레이아웃의 구조 장치다. --line(1.33:1)은 구조선치고 약해서
+                  // muted/30 으로 올렸다 — 라이트 1.55:1 / 다크 1.80:1
+                  "relative border-l border-muted/30 pl-7",
+                  isLast ? "pb-0" : "pb-12",
+                )}
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-[3px] top-[7px] h-[7px] w-[7px] rounded-full bg-accent ring-4 ring-surface"
+                />
 
-              return (
-                <div key={idx} className="relative flex items-center">
-                  {/* ===================== */}
-                  {/* 💻 PC 지그재그 */}
-                  {/* ===================== */}
-                  <div
-                    className={`hidden pc:flex w-full items-center ${isLeft ? "justify-start" : "justify-end"}`}
-                  >
-                    <div
-                      className={`w-[45%] ${isLeft ? "text-right pr-8" : "text-left pl-8"}`}
-                    >
-                      <span className="text-sm text-muted">
-                        {item.date}
-                      </span>
+                <h3 className="text-h3 font-semibold leading-snug">
+                  {item.title}
+                </h3>
 
-                      <h3 className="text-lg font-semibold mt-1">
-                        {item.title}
-                      </h3>
-
-                      {item.description && (
-                        <p className="text-sm text-muted mt-2 leading-relaxed">
-                          {item.description}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* ===================== */}
-                  {/* 📱 모바일 단일 라인 */}
-                  {/* ===================== */}
-                  <div className="pc:hidden pl-10">
-                    <span className="text-sm text-muted">
-                      {item.date}
-                    </span>
-
-                    <h3 className="text-lg font-semibold mt-1">{item.title}</h3>
-
-                    {item.description && (
-                      <p className="text-sm text-muted mt-2 leading-relaxed">
-                        {item.description}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* ===================== */}
-                  {/* 🔵 공통 점 */}
-                  {/* ===================== */}
-                  <div
-                    className={`absolute w-4 h-4 rounded-full bg-accent ${"pc:left-1/2 pc:-translate-x-1/2 left-1"}`}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
+                {item.description && (
+                  <p className="mt-2 max-w-prose text-body text-muted">
+                    {item.description}
+                  </p>
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 };
