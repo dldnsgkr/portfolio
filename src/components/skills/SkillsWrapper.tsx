@@ -3,22 +3,25 @@ import IconButton from "../button/IconButton";
 import type { SkillWrapperType } from "@/types/skillsList.types";
 import { DARK_INVERT_ICONS } from "@/data/iconTone";
 
-// Main 과 Experience 는 subTit 이 이미 위계를 설명하고 있다. 그 위계를 밀도로 보여준다.
-// Main 은 크게(아이콘 40px), Experience 는 조밀하게(28px).
+// Main 과 Experience 는 subTit 이 이미 위계를 설명한다. 그 위계를 밀도로 보여준다.
 type Variant = "main" | "experience";
 
+// 셀 폭을 1fr 신축이 아니라 고정값으로 두고 justify-start 로 좌측 정렬한다.
+// 1fr 이면 열이 콘텐츠 폭을 정확히 나눠 가져 마지막 줄의 빈 칸이 "표에서 빠진 셀"처럼
+// 도드라진다. 고정 폭 + 좌측 정렬이면 남는 자리가 줄 끝 여백이 되어 문장 줄바꿈처럼 읽힌다.
+// (항목 19개·43개는 어떤 열 수로도 나누어떨어지지 않는다 — 없앨 수 없는 문제라 덜 보이게 한다.)
 const SIZES = {
   main: {
-    grid: "grid-cols-[repeat(auto-fill,minmax(104px,1fr))]",
+    grid: "grid-cols-[repeat(auto-fill,100px)]",
     cell: "min-h-[104px] gap-2.5",
     icon: "h-10 w-10",
     label: "text-small",
   },
   experience: {
-    grid: "grid-cols-[repeat(auto-fill,minmax(84px,1fr))]",
-    cell: "min-h-[80px] gap-2",
-    icon: "h-7 w-7",
-    label: "text-[0.75rem] leading-tight",
+    grid: "grid-cols-[repeat(auto-fill,88px)]",
+    cell: "min-h-[64px] gap-1.5",
+    icon: "h-6 w-6",
+    label: "text-[0.6875rem] leading-[1.25]",
   },
 } satisfies Record<Variant, Record<string, string>>;
 
@@ -32,12 +35,12 @@ const SkillsWrapper = ({
   const size = SIZES[variant];
 
   return (
-    // 바깥 보더 박스는 없앴다 — 회색 슬래브처럼 무거웠고, 그룹 구분은 제목과 여백으로 충분하다.
+    // 바깥 보더 박스는 없앴다 — 회색 슬래브처럼 무거웠고, 구분은 제목과 여백으로 충분하다.
     <section className={clsx("flex flex-col", className)}>
       <h3 className="text-h3 font-semibold text-primary">{mainTit}</h3>
       <p className="mt-1 text-small text-muted">{subTit}</p>
 
-      <div className={clsx("mt-6 grid gap-y-2", size.grid)}>
+      <div className={clsx("mt-6 grid justify-start gap-y-1", size.grid)}>
         {skillList.map((skillObj) => (
           <IconButton
             key={skillObj.name}
@@ -51,12 +54,12 @@ const SkillsWrapper = ({
                 loading="lazy"
                 className={clsx(
                   size.icon,
-                  "pointer-events-none object-contain transition duration-300 ease-out",
-                  // 라이트: PC 에서만 grayscale — 터치 기기는 hover 가 없어 회색으로 굳는다
-                  "pc:grayscale pc:opacity-70 pc:group-hover:grayscale-0 pc:group-hover:opacity-100",
-                  // 다크: grayscale 를 끄고 불투명도를 0.9 로. 딥 그린 위에서 0.7 은 너무 흐리다
-                  "dark:pc:grayscale-0 dark:opacity-90 dark:pc:group-hover:opacity-100",
-                  // 순수 검정 단색 로고는 다크에서 뒤집지 않으면 형체가 남지 않는다
+                  "pointer-events-none object-contain opacity-90 transition duration-300 ease-out group-hover:opacity-100",
+                  // grayscale 은 걷어냈다. 측정 결과 라이트·다크 양쪽 가시성 저하의
+                  // 직접 원인이었다 — 라이트에서 3:1 미달 28개 중 27개가 채도 0.35 이상,
+                  // 즉 색상으로는 구분되는데 grayscale 이 그 색상을 지워 배경과 같은
+                  // 밝은 회색으로 만들었다. 불투명도로는 해결되지 않는다(α=1.0 에서도 미달).
+                  // 순수 검정 단색 로고만 다크에서 뒤집는다.
                   DARK_INVERT_ICONS.has(skillObj.name) && "dark:invert",
                 )}
               />

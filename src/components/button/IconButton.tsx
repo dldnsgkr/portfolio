@@ -23,8 +23,9 @@ const IconButton = ({
         // 기존 text-gray-600 / hover:text-gray-900 은 팔레트 밖 회색이라
         // 다크에서 스킬 이름이 배경에 묻혔다. 토큰으로 바꾼다.
         className={clsx(
-          "group flex flex-col items-center justify-center break-keep px-2 py-3 text-center",
-          "text-muted hover:text-primary",
+          "group flex flex-col items-center justify-center break-keep px-1.5 py-2 text-center",
+          // grayscale→컬러 hover 를 걷어냈으므로 클릭 가능하다는 신호는 셀이 맡는다
+          "text-muted transition-colors hover:bg-muted/10 hover:text-primary",
           "rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           className,
         )}
