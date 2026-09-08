@@ -1,4 +1,9 @@
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useMotionValueEvent,
+  useReducedMotion,
+} from "framer-motion";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import Container from "./Container";
@@ -52,6 +57,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const lastY = useRef(0);
   const sheetRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   // hero 를 관찰 대상에만 넣는다(네비 항목은 아니다). 스파이는 섹션 사이 빈 구간에서
   // 마지막 값을 유지하므로, hero 가 없으면 최상단에서도 About 이 활성으로 남는다.
@@ -100,7 +106,10 @@ const Header = () => {
         initial={false}
         animate={{
           y: hidden ? "-100%" : "0%",
-          transition: { duration: 0.3, ease: "easeInOut" },
+          // 명시적 duration 은 MotionConfig 기본값을 덮으므로 직접 가드한다
+          transition: reduceMotion
+            ? { duration: 0 }
+            : { duration: 0.3, ease: "easeInOut" },
         }}
         className={clsx(
           "fixed left-0 top-0 z-50 w-full",

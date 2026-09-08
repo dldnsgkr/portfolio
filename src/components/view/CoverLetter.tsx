@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import SectionTitle from "../SectionTitle";
 import { coverLetterData } from "@/data/coverLetter";
 
 export default function CoverLetter() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const reduceMotion = useReducedMotion();
 
   return (
     // 카드는 컨테이너 전체 폭을 쓴다. 여기에 max-w-prose 를 걸면 아래
@@ -42,7 +43,11 @@ export default function CoverLetter() {
                   <span className="absolute h-[1.5px] w-4 bg-muted" />
                   <motion.span
                     animate={{ rotate: isOpen ? 0 : 90 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    transition={
+                      reduceMotion
+                        ? { duration: 0 }
+                        : { duration: 0.25, ease: "easeOut" }
+                    }
                     className="absolute h-[1.5px] w-4 bg-muted"
                   />
                 </span>
@@ -55,7 +60,11 @@ export default function CoverLetter() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    transition={
+                      reduceMotion
+                        ? { duration: 0 }
+                        : { duration: 0.3, ease: "easeInOut" }
+                    }
                     className="overflow-hidden"
                   >
                     <div className="border-t border-border px-6 pb-6 pt-4">

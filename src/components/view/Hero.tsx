@@ -20,7 +20,10 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.24, ease: "easeOut" },
+      // 명시적 duration 은 App 의 MotionConfig 기본값을 덮으므로 직접 가드한다
+      transition: reduceMotion
+        ? { duration: 0 }
+        : { duration: 0.24, ease: "easeOut" },
     },
   };
 

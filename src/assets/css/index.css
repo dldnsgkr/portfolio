@@ -72,11 +72,23 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  /* reduced-motion 블랭킷 가드.
+     !important 가 없으면 utilities 레이어의 duration-* / transition-* 유틸리티가
+     이 규칙을 덮는다(테마 토글 손잡이의 transition-transform 등).
+     framer-motion 쪽은 CSS 로 막을 수 없어 App.tsx 의 MotionConfig 가 맡는다. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
-      transition-duration: 0.01ms;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      animation-iteration-count: 1 !important;
+    }
+
+    html {
+      scroll-behavior: auto !important;
     }
   }
 }

@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useModalDialog } from "@/lib/useModalDialog";
 
@@ -17,6 +17,7 @@ export default function ProjectModal({
 }) {
   const [mounted, setMounted] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     setMounted(true);
@@ -48,7 +49,9 @@ export default function ProjectModal({
             initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.96, opacity: 0 }}
-            transition={{ duration: 0.22 }}
+            // 여기에 duration 을 명시하면 App 의 MotionConfig 기본값을 덮어써서
+            // reduced-motion 에서도 opacity 가 계속 전환된다. 직접 가드한다.
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.22 }}
             onClick={(e) => e.stopPropagation()}
           >
             {children}
