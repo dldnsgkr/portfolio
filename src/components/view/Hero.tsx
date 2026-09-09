@@ -1,6 +1,6 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { profile } from "@/data/profile";
-import HeroCardIndex from "./HeroCardIndex";
+import HeroLamp from "./HeroLamp";
 
 // 이 페이지에서 과감함을 쓰는 유일한 자리. 나머지 섹션은 조용하게 간다.
 // 위계는 색이 아니라 활자 크기와 굵기로만 만든다 (단어 단위 색 강조 없음).
@@ -34,12 +34,16 @@ export default function Hero() {
       animate="visible"
       className="relative flex min-h-[calc(86svh-6rem)] w-full flex-col justify-center"
     >
+      {/* 다크 모드에서 천장 램프가 내려와 Hero 를 비춘다 */}
+      <HeroLamp />
+
       {/* 모노그램이 흐름 안으로 들어왔으므로 광학 보정용 mb 반응형 분기는 없앴다.
           겹침이 구조적으로 생기지 않고, 간격이 뷰포트 폭에 따라 흔들리지도 않는다. */}
-      <div>
-        {/* 옵션 A — 이름 위 모노그램. 이 한 줄을 주석 처리하면
-            옵션 B(순수 타이포그래피 Hero)가 된다. */}
-        <HeroCardIndex variants={item} />
+      <div className="relative z-10">
+        {/* 램프가 이름 위 자리를 쓰게 되어 모노그램은 뺐다.
+            둘 다 스페이드를 말하는데 램프가 훨씬 강해 중복이었다.
+            되살리려면 아래 한 줄의 주석을 풀면 된다. */}
+        {/* <HeroCardIndex variants={item} /> */}
 
         <motion.h1 variants={item}>
           <span className="block text-[clamp(3.25rem,7vw,4.75rem)] font-bold leading-[0.98] tracking-[-0.03em]">

@@ -22,7 +22,9 @@ export default function Section({
       className={clsx(
         tone === "surface" ? "bg-surface" : "bg-background",
         fullHeight
-          ? "flex min-h-[86svh] items-center"
+          // hero 만 쓰는 분기. 램프 빛이 콘텐츠 컨테이너 밖으로 번져야 하므로
+          // 클리핑은 컨테이너가 아니라 뷰포트 폭인 섹션에서 한다.
+          ? "flex min-h-[86svh] items-center overflow-hidden"
           : "py-section-mobile pc:py-section-pc",
       )}
     >

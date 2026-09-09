@@ -47,7 +47,7 @@ export default function ProjectCard(props: ProjectWrapperType) {
       // reduced-motion 에서는 부양을 없앤다 — 어포던스는 보더 색이 맡는다.
       whileHover={reduceMotion ? undefined : { y: -2 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="flex cursor-pointer flex-col rounded-2xl border border-muted/40 bg-surface p-6 transition-colors hover:border-accent/60"
+      className="mb-6 flex break-inside-avoid cursor-pointer flex-col rounded-2xl border border-muted/40 bg-surface p-6 transition-colors hover:border-accent/60"
       onClick={() => setOpen(true)}
     >
       {hasImage && (
