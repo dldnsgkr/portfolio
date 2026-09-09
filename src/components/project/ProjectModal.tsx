@@ -34,6 +34,14 @@ export default function ProjectModal({
       {open && (
         <motion.div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-0 pc:p-6"
+          // 트럼프 카드 뒷면의 다이아몬드 격자. 모달이 열릴 때 정체성이 한 번 더 나온다.
+          // 45°/-45° 반복 그라데이션 두 겹이면 되므로 에셋도 모션도 필요 없다.
+          style={{
+            backgroundImage: `
+              repeating-linear-gradient(45deg, rgba(198,166,100,0.055) 0 1px, transparent 1px 15px),
+              repeating-linear-gradient(-45deg, rgba(198,166,100,0.055) 0 1px, transparent 1px 15px)
+            `,
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

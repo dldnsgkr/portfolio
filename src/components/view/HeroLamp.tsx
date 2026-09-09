@@ -1,4 +1,11 @@
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
+import { useEffect } from "react";
 import { useIsDark } from "@/lib/useIsDark";
 
 // 다크 모드로 바뀌면 천장에서 펜던트 램프가 내려와 Hero 를 비춘다.
@@ -27,6 +34,8 @@ const RIM_TOP = "91%";
 // 갓 지름은 원뿔 폭의 24.4% 다. 다만 blur 가 양옆으로 번지므로 기하학적 꼭지는
 // 그보다 좁게 두어야 실제로 "갓에서 시작하는" 폭으로 보인다.
 const CONE_APEX = { left: "41.5%", right: "58.5%" };
+// 커서가 화면 끝에 있을 때의 최대 기울기. 이보다 크면 매달린 게 아니라 흔드는 것처럼 보인다.
+const MAX_TILT_DEG = 2.4;
 
 export default function HeroLamp() {
   const isDark = useIsDark();
@@ -39,6 +48,37 @@ export default function HeroLamp() {
     duration: reduceMotion ? 0 : 0.8,
     delay: reduceMotion ? 0 : 0.3,
   };
+
+  // 커서를 따라 램프가 기울고 빛이 함께 흐른다.
+  // 사용자 동작에 반응하는 모션이라 "자동 재생은 Hero 1회" 원칙과 충돌하지 않는다.
+  // 천장 고정점(전선 위쪽)을 축으로 도니 매달린 물체처럼 읽힌다.
+  const tiltTarget = useMotionValue(0);
+  const tilt = useSpring(tiltTarget, {
+    stiffness: 55,
+    damping: 16,
+    mass: 0.7,
+  });
+
+  useEffect(() => {
+    // 터치 기기는 커서가 없다. reduced-motion 이면 아예 붙이지 않는다.
+    if (reduceMotion) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const onPointerMove = (e: PointerEvent) => {
+      const half = window.innerWidth / 2;
+      const norm = Math.max(-1, Math.min(1, (e.clientX - half) / half));
+      tiltTarget.set(norm * MAX_TILT_DEG);
+    };
+    // 창을 벗어나면 수직으로 되돌린다
+    const onLeave = () => tiltTarget.set(0);
+
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.addEventListener("pointerleave", onLeave);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerleave", onLeave);
+    };
+  }, [reduceMotion, tiltTarget]);
 
   return (
     <AnimatePresence>
@@ -62,6 +102,9 @@ export default function HeroLamp() {
             className="absolute top-0 w-[230px] -translate-x-1/2 pc:w-[280px]"
             style={{ left: "var(--lamp-x)" }}
           >
+            {/* 전선·갓·빛을 한 덩어리로 기울인다. 축은 컨테이너 상단 중앙(천장 고정점).
+                빛만 따로 두면 갓과 빛이 어긋나 보인다. */}
+            <motion.div style={{ rotate: tilt, transformOrigin: "50% 0" }}>
             {/* 빛 원뿔 — 갓 테두리에서 아래로 넓어진다.
                 순수 radial-gradient 로는 옆으로 번진 얼룩이 되므로 clip-path
                 사다리꼴에 세로 그라데이션을 넣고 blur 로 직선 변을 녹인다.
@@ -183,6 +226,7 @@ export default function HeroLamp() {
                   />
                 </svg>
               </motion.div>
+            </motion.div>
             </motion.div>
           </div>
         </motion.div>
