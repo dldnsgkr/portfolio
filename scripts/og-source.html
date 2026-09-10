@@ -1,0 +1,52 @@
+<!--
+  public/og.png 의 원본.
+
+  og.png 는 링크를 공유했을 때 뜨는 미리보기 썸네일이다(1200x630).
+  사이트의 실제 폰트로 렌더해야 하므로 이미지 편집기가 아니라 이 페이지를
+  캡처해서 만든다. 색은 src/assets/css/index.css 의 .dark 토큰과 맞춘다
+  (#141414 / #F2EFE6 / #A2A2A2 / #C6A664).
+
+  재생성:
+    1) 폰트가 /fonts/ 에서 로드돼야 하므로 public/ 을 기준으로 서빙한다
+         cd public && python3 -m http.server 5198
+         cp scripts/og-source.html public/   (임시 — 배포 전에 지울 것)
+       또는 임시 디렉터리에 og-source.html 과 fonts/ 만 두고 서빙한다.
+    2) 뷰포트 1200x630, deviceScaleFactor 1 로 열어 document.fonts.ready 를
+       기다린 뒤 전체 화면을 public/og.png 로 캡처한다.
+    3) 캡처본이 정확히 1200x630 이고 배경이 (20,20,20)인지 확인한다.
+
+  주의: 이 파일을 public/ 에 남기면 그대로 배포된다.
+-->
+<!doctype html><meta charset="utf-8"><title>og</title>
+<style>
+  @font-face { font-family:"Pretendard Variable"; src:url("/fonts/pretendard-subset.woff2") format("woff2"); font-weight:45 930; font-display:block; }
+  @font-face { font-family:"Fraunces"; src:url("/fonts/fraunces-subset.woff2") format("woff2"); font-weight:100 900; font-display:block; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    background:#141414; color:#F2EFE6;
+    font-family:"Pretendard Variable",system-ui,sans-serif;
+    font-optical-sizing:auto;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:0 96px; position:relative;
+  }
+  .mono{display:flex;flex-direction:column;align-items:center;width:fit-content;color:rgba(198,166,100,.40);gap:6px;margin-bottom:34px}
+  .mono .rank{font-family:Fraunces,serif;font-weight:700;font-size:64px;line-height:1}
+  .mono svg{width:34px;display:block}
+  .name{font-size:104px;font-weight:700;letter-spacing:-.03em;line-height:.98}
+  .alias{font-family:Fraunces,serif;font-weight:400;font-size:40px;line-height:1;color:#A2A2A2;margin-top:10px}
+  .role{font-size:30px;font-weight:500;margin-top:40px}
+  .copy{font-size:22px;line-height:1.6;color:#A2A2A2;margin-top:10px}
+  .url{position:absolute;left:96px;bottom:56px;font-size:20px;color:#A2A2A2;font-variant-numeric:tabular-nums}
+</style>
+<body>
+  <div class="mono">
+    <span class="rank">J</span>
+    <svg viewBox="12 6 76 88" fill="currentColor"><path d="M50 6C50 6 12 34 12 57C12 69 21 77 32 77C38 77 43 74 46 70C46 80 42 88 34 94L66 94C58 88 54 80 54 70C57 74 62 77 68 77C79 77 88 69 88 57C88 34 50 6 50 6Z"/></svg>
+  </div>
+  <div class="name">이운학</div>
+  <div class="alias">Jace</div>
+  <div class="role">Full Stack Developer</div>
+  <div class="copy">UI부터 API까지, 서비스의 처음과 끝을 만듭니다.</div>
+  <div class="url">dldnsgkr.github.io/portfolio</div>
+</body>
