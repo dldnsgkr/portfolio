@@ -1,8 +1,7 @@
-import { useEffect, useRef } from "react";
+import { MotionConfig, useReducedMotion } from "framer-motion";
 import Header from "./components/Header";
 import Hero from "./components/view/Hero";
 import Section from "./components/Section";
-import { throttle } from "./lib/utils";
 import AboutMe from "./components/view/AboutMe";
 import Project from "./components/view/Project";
 // import Contact from "./components/view/Contact";
@@ -12,43 +11,27 @@ import CoverLetter from "./components/view/CoverLetter";
 // import Certificates from "./components/view/Certificates";
 
 export default function App() {
-  const sectionRefs = useRef({
-    hero: null as HTMLDivElement | null,
-    about: null as HTMLDivElement | null,
-    projects: null as HTMLDivElement | null,
-    contact: null as HTMLDivElement | null,
-  });
-
-  useEffect(() => {
-    const handleScroll = throttle(() => {
-      const scrollY = window.scrollY;
-      const positions = Object.fromEntries(
-        Object.entries(sectionRefs.current).map(([key, el]) => [
-          key,
-          el ? el.offsetTop : 0,
-        ]),
-      );
-
-      // 여기서 원하는 로직 수행 (예: 현재 섹션 감지)
-      Object.entries(positions).reduce(
-        (closest, [key, pos]) => (scrollY >= pos - 200 ? key : closest), // 약간의 오차 허용
-        "hero",
-      );
-    }, 150); // 150ms 단위로 제한
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // 스크롤 스파이는 Header 의 useScrollSpy 로 옮겼다.
+  // 여기 있던 scroll 리스너는 offsetTop 을 재고 reduce 로 계산해놓고
+  // 결과를 어디에도 쓰지 않았다.
+  const reduceMotion = useReducedMotion();
 
   return (
-    <>
+    // CSS 로는 framer-motion 애니메이션을 막을 수 없다. reducedMotion="user" 가
+    // transform·layout 애니메이션을 끄고, duration 0 이 남은 전환까지 즉시로 만든다.
+    // 카드 hover, 모달·시트 전환, 헤더 hide/show, 아코디언이 모두 여기에 걸린다.
+    <MotionConfig
+      reducedMotion="user"
+      transition={reduceMotion ? { duration: 0 } : undefined}
+    >
       <Header />
-      <main className="min-h-screen transition-colors duration-500 ease-in-out bg-background dark:bg-background-dark text-primary dark:text-primary-dark">
-        <Section id="hero" noPadding>
+      <main className="min-h-screen text-primary">
+        {/* 배경 톤을 bg / surface 로 번갈아 주어 섹션 리듬을 만든다 */}
+        <Section id="hero" fullHeight>
           <Hero />
         </Section>
 
-        <Section id="about">
+        <Section id="about" tone="surface">
           <AboutMe />
         </Section>
 
@@ -56,7 +39,7 @@ export default function App() {
           <CoverLetter />
         </Section>
 
-        <Section id="history">
+        <Section id="history" tone="surface">
           <History />
         </Section>
 
@@ -68,7 +51,7 @@ export default function App() {
           <Skills />
         </Section>
 
-        <Section id="projects" noBorder>
+        <Section id="projects" tone="surface">
           <Project />
         </Section>
 
@@ -76,6 +59,6 @@ export default function App() {
           <Contact />
         </Section> */}
       </main>
-    </>
+    </MotionConfig>
   );
 }

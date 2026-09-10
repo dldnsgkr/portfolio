@@ -11,7 +11,8 @@
     "update:browsers": "npx update-browserslist-db@latest",
     "preview": "vite preview",
     "deploy": "node scripts/predeploy.mjs && vite build && gh-pages -d dist",
-    "typecheck": "tsc -p tsconfig.app.json --noEmit"
+    "typecheck": "tsc -p tsconfig.app.json --noEmit",
+    "fonts:check": "node scripts/check-font-charset.mjs"
   },
   "browserslist": {
     "production": [
@@ -30,14 +31,15 @@
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
     "framer-motion": "^12.35.2",
-    "motion": "^12.23.9",
     "postcss": "^8.5.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "3.4.17"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"]
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

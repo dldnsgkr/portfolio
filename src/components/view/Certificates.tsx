@@ -26,7 +26,7 @@ const Certificates = () => {
   return (
     <section
       id="certificates"
-      className="flex flex-col p-6 pc:py-20 bg-background dark:bg-background-dark text-primary dark:text-primary-dark transition-colors duration-500 ease-in-out"
+      className="flex flex-col p-6 pc:py-20 bg-background text-primary"
     >
       <div className="max-w-5xl mx-auto w-full">
         <SectionTitle>Certificates</SectionTitle>
@@ -35,28 +35,21 @@ const Certificates = () => {
           {certificateData.map((item, idx) => (
             <div
               key={idx}
-              className="
-                p-6 rounded-2xl
-                border border-muted dark:border-muted-dark
-                bg-white/50 dark:bg-background-dark/50
-                backdrop-blur
-                transition-all duration-300
-                hover:shadow-lg
-              "
+              className="p-6 rounded-2xl border border-muted bg-surface/50 backdrop-blur transition-all duration-300 hover:shadow-lg"
             >
               <div className="flex flex-col gap-2">
-                <span className="text-sm text-muted dark:text-muted-dark">
+                <span className="text-sm text-muted">
                   {item.date}
                 </span>
 
                 <h3 className="text-lg font-semibold">{item.title}</h3>
 
-                <span className="text-sm text-accent dark:text-accent-dark">
+                <span className="text-sm text-accent">
                   {item.organization}
                 </span>
 
                 {item.description && (
-                  <p className="text-sm text-muted dark:text-muted-dark mt-2 leading-relaxed">
+                  <p className="text-sm text-muted mt-2 leading-relaxed">
                     {item.description}
                   </p>
                 )}

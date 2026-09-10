@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Jace of Spades</title>
+  <!-- 탭 배경이 라이트든 다크든 식별되도록 자체 배경을 깐다.
+       투명 배경 + 단색 글리프로 두면 한쪽 테마에서 사라진다. -->
+  <rect width="100" height="100" rx="20" fill="#101915"/>
+  <!-- Hero 모노그램과 같은 스페이드. 16px 에서 뭉개지지 않게 크게 앉힌다. -->
+  <g transform="translate(50 52) scale(0.9) translate(-50 -50)">
+    <path fill="#C6A664" d="M50 6C50 6 12 34 12 57C12 69 21 77 32 77C38 77 43 74 46 70C46 80 42 88 34 94L66 94C58 88 54 80 54 70C57 74 62 77 68 77C79 77 88 69 88 57C88 34 50 6 50 6Z"/>
+  </g>
+</svg>

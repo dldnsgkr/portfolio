@@ -1,35 +1,34 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import clsx from "clsx";
+import Container from "./Container";
 
+// 레이아웃 프리미티브 — 애니메이션 래퍼가 아니다.
+// 배경 톤, 상하 여백, 가로 컨테이너 세 가지만 책임진다.
+// 섹션마다 걸려 있던 fade-up 은 제거했다(모든 섹션이 똑같이 떠오르는 건 템플릿 신호).
 export default function Section({
   id,
   children,
-  noPadding,
-  noBorder,
+  tone = "bg",
+  fullHeight = false,
 }: {
   id: string;
   children: React.ReactNode;
-  noPadding?: boolean;
-  // border 아래쪽
-  noBorder?: boolean;
+  // 인접 섹션끼리 배경을 번갈아 주어 리듬을 만든다. 구분선은 쓰지 않는다.
+  tone?: "bg" | "surface";
+  fullHeight?: boolean;
 }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-
   return (
-    <motion.section
+    <section
       id={id}
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`${noPadding ? "" : "py-24"} mobile:py-0
-        bg-background dark:bg-background-dark
-        text-primary dark:text-primary-dark
-        border-b ${noBorder ? "border-b-0" : ""} border-x-slate-200 dark:border-x-slate-700
-        transition-colors duration-500 ease-in-out`}
+      className={clsx(
+        tone === "surface" ? "bg-surface" : "bg-background",
+        fullHeight
+          // hero 만 쓰는 분기. 램프 빛이 콘텐츠 컨테이너 밖으로 번져야 하므로
+          // 클리핑은 컨테이너가 아니라 뷰포트 폭인 섹션에서 한다.
+          ? "flex min-h-[86svh] items-center overflow-hidden"
+          : "py-section-mobile pc:py-section-pc",
+      )}
     >
-      {children}
-    </motion.section>
+      <Container>{children}</Container>
+    </section>
   );
 }
