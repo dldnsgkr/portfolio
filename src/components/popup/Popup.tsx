@@ -5,7 +5,7 @@ import {
   getPopupContainerClass,
   getVariantsByType,
 } from "./PopupUtils";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import CustomButton from "../button/CustomButton";
 import CloseIcon from "../icon/CloseIcon";
