@@ -111,7 +111,14 @@ const Popup = ({
             {title && (
               <div className="flex justify-between items-center w-full mb-4">
                 <h3 className="text-lg font-semibold">{title}</h3>
-                <CustomButton onClick={onClose} size="icon">
+                {/* 팝업이 열리면 여기로 첫 포커스가 온다. 접근 가능한 이름이 없었고
+                    브라우저 기본 파란 아웃라인이 그려졌다 — 둘 다 맞춘다. */}
+                <CustomButton
+                  onClick={onClose}
+                  size="icon"
+                  aria-label="닫기"
+                  className="rounded-sm p-1 text-muted hover:text-primary"
+                >
                   <CloseIcon />
                 </CustomButton>
               </div>
@@ -120,15 +127,17 @@ const Popup = ({
 
             {type === "confirm" && (
               <div className="flex justify-end gap-2">
+                {/* bg-primary + text-white 는 다크에서 --text 가 near-white 라
+                    흰 배경에 흰 글자가 된다. ProjectCard 와 같은 규칙으로 맞춘다. */}
                 <button
                   onClick={onClose}
-                  className="px-4 py-2 rounded-md border"
+                  className="rounded-md border border-muted/40 px-4 py-2 text-primary transition-colors hover:bg-muted/10"
                 >
                   {cancelText}
                 </button>
                 <button
                   onClick={onConfirm}
-                  className="px-4 py-2 rounded-md bg-primary text-white"
+                  className="rounded-md bg-accent px-4 py-2 text-background transition-opacity hover:opacity-90"
                 >
                   {confirmText}
                 </button>

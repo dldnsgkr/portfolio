@@ -86,7 +86,10 @@ const History = () => {
               >
                 <span
                   aria-hidden="true"
-                  className="absolute -left-[3px] top-[7px] h-[7px] w-[7px] rounded-full bg-accent ring-4 ring-surface"
+                  // -4px: 절대 배치의 기준은 패딩 박스라 1px 보더가 그 밖에 있다.
+                  // 보더 중심은 패딩 박스 기준 -0.5px 이므로 7px 점은 -0.5-3.5 = -4px 여야
+                  // 축과 중심이 맞는다(-3px 이면 오른쪽으로 1px 밀린다).
+                  className="absolute -left-[4px] top-[7px] h-[7px] w-[7px] rounded-full bg-accent ring-4 ring-surface"
                 />
 
                 <h3 className="text-h3 font-semibold leading-snug">

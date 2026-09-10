@@ -36,14 +36,17 @@ const bottomSheetVariants: Variants = {
 
 const confirmVariants = modalVariants;
 
+// bg-white 하드코딩이 다크 모드에서 흰 패널 + near-white 글자(1.12:1)를 만들었다.
+// Skills 아이콘을 누르면 열리는 팝업이 이 경로다. 팔레트 토큰으로 바꾼다.
 const getPopupContainerClass = (type: PopupType) => {
+  const base = "relative bg-surface text-primary";
   switch (type) {
     case "full":
-      return "relative w-full h-full bg-white overflow-y-auto";
+      return `${base} h-full w-full overflow-y-auto`;
     case "bottomSheet":
-      return "relative w-full max-w-md bg-white rounded-t-2xl p-6";
+      return `${base} w-full max-w-md rounded-t-2xl border border-border p-6`;
     default:
-      return "relative w-[90%] max-w-md bg-white rounded-2xl p-6";
+      return `${base} w-[90%] max-w-md rounded-2xl border border-border p-6 shadow-2xl`;
   }
 };
 
