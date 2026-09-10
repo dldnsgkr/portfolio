@@ -1,11 +1,37 @@
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 import SectionTitle from "../SectionTitle";
 import { coverLetterData } from "@/data/coverLetter";
+import { reveal } from "@/lib/reveal";
 
 export default function CoverLetter() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const reduceMotion = useReducedMotion();
+
+  // 펼칠 때 문단이 순서대로 들어온다. 여기 모션은 스크롤이 아니라 클릭에 대한
+  // 응답이라 자동 재생이 아니고, 높이가 열리는 동안 내용이 함께 채워져
+  // 아코디언이 "빈 상자가 커지는" 것처럼 보이지 않는다.
+  const paraStack: Variants = {
+    hidden: {},
+    visible: {
+      transition: reduceMotion
+        ? { staggerChildren: 0, delayChildren: 0 }
+        : { staggerChildren: 0.07, delayChildren: 0.08 },
+    },
+  };
+  const para: Variants = {
+    hidden: { opacity: 0, y: 6 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: reveal(reduceMotion, { duration: 0.28, ease: "easeOut" }),
+    },
+  };
 
   return (
     // 카드는 컨테이너 전체 폭을 쓴다. 여기에 max-w-prose 를 걸면 아래
@@ -69,13 +95,22 @@ export default function CoverLetter() {
                   >
                     <div className="border-t border-border px-6 pb-6 pt-4">
                       {/* 구분선은 카드 폭 전체, 본문만 68ch */}
-                      <div className="flex max-w-prose flex-col gap-4">
+                      <motion.div
+                        className="flex max-w-prose flex-col gap-4"
+                        variants={paraStack}
+                        initial="hidden"
+                        animate="visible"
+                      >
                         {item.paragraphs.map((paragraph, pIdx) => (
-                          <p key={pIdx} className="text-body text-muted">
+                          <motion.p
+                            key={pIdx}
+                            variants={para}
+                            className="text-body text-muted"
+                          >
                             {paragraph}
-                          </p>
+                          </motion.p>
                         ))}
-                      </div>
+                      </motion.div>
                     </div>
                   </motion.div>
                 )}
