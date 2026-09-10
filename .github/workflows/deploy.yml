@@ -36,14 +36,20 @@ jobs:
       # tsc -b && vite build — 타입 오류가 있으면 여기서 배포가 멈춘다.
       - run: pnpm run build
 
-      # CNAME 이 빠지면 커스텀 도메인 바인딩이 조용히 풀린다. 조용히 넘기지 않는다.
-      - name: Verify CNAME
+      # 커스텀 도메인을 뗐으므로 CNAME 검사도 뗀다. 대신 그 자리에서
+      # base 를 지킨다 — vite 의 base 가 "/" 로 돌아가면 프로젝트 페이지에서
+      # 에셋이 전부 404 나는데, 빌드는 성공하므로 조용히 깨진다.
+      - name: Verify base path
         run: |
-          if [ ! -f dist/CNAME ]; then
-            echo "::error::dist/CNAME 이 없다. public/CNAME 을 확인하라 — 배포하면 커스텀 도메인이 풀린다."
+          if [ -f dist/CNAME ]; then
+            echo "::error::dist/CNAME 이 있다. 커스텀 도메인은 더 이상 쓰지 않는다 — public/CNAME 을 지워라."
             exit 1
           fi
-          echo "CNAME: $(cat dist/CNAME)"
+          if ! grep -q 'src="/portfolio/assets/' dist/index.html; then
+            echo "::error::dist/index.html 이 /portfolio/ 를 가리키지 않는다. vite.config.ts 의 base 를 확인하라."
+            exit 1
+          fi
+          echo "base OK: $(grep -o 'src="/portfolio/assets/[^"]*"' dist/index.html | head -1)"
 
       - uses: peaceiris/actions-gh-pages@v4
         with:

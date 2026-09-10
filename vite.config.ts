@@ -20,5 +20,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "/",
+  // 커스텀 도메인을 떼고 프로젝트 페이지(dldnsgkr.github.io/portfolio)로 돌아왔다.
+  // 프로젝트 페이지는 루트가 아니라 /portfolio/ 아래에서 서빙되므로 base 가 맞아야
+  // 에셋이 전부 404 난다.
+  base: "/portfolio/",
 });
