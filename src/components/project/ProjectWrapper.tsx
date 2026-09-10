@@ -26,9 +26,13 @@ const ProjectWrapper = ({
           JS masonry 는 lazy 이미지 로드마다 재측정이 필요해 레이아웃이 튀므로 CSS 에 맡긴다.
           대가: 시각적 읽는 순서가 행 우선에서 열 우선으로 바뀐다.
           DOM 순서는 그대로라 스크린리더·키보드 Tab 은 원본 순서를 따른다. */}
-      <div className="mt-6 columns-1 gap-6 sm:columns-2 lg:columns-3">
-        {projectList.map((project) => (
-          <ProjectCard key={project.title} {...project} />
+      {/* data-deck: 카드가 어디서 날아올지의 기준점. 각 카드가 자기 위치에서
+          이 박스의 좌상단까지의 거리를 재서 그 일부를 시작 지점으로 쓴다.
+          그래서 13장이 한 점에서 뿌려진 것처럼 수렴한다. */}
+      <div data-deck className="mt-6 columns-1 gap-6 sm:columns-2 lg:columns-3">
+        {/* index 는 딜(deal) 순서용이다 — 카드가 한꺼번에 나타나지 않게 한다 */}
+        {projectList.map((project, idx) => (
+          <ProjectCard key={project.title} index={idx} {...project} />
         ))}
       </div>
     </section>

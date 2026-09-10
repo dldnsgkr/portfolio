@@ -4,11 +4,13 @@ import {
   useMotionValueEvent,
   useReducedMotion,
 } from "framer-motion";
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import clsx from "clsx";
 import Container from "./Container";
 import { useModalDialog } from "@/lib/useModalDialog";
 import { useScrollSpy } from "@/lib/useScrollSpy";
+import { useIsDark } from "@/lib/useIsDark";
+import { toggleTheme } from "@/lib/theme";
 
 // Hero 항목은 뺐다 — 최상단으로 가는 길은 로고 클릭이 맡는다.
 const NAV_ITEMS = [
@@ -63,20 +65,10 @@ const Header = () => {
   // 마지막 값을 유지하므로, hero 가 없으면 최상단에서도 About 이 활성으로 남는다.
   const activeId = useScrollSpy(["hero", ...NAV_ITEMS.map((item) => item.id)]);
 
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme");
-      if (saved === "dark") return true;
-      if (saved === "light") return false;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-    return false;
-  });
-
-  useLayoutEffect(() => {
-    if (isDark) document.documentElement.classList.add("dark");
-    else document.documentElement.classList.remove("dark");
-  }, [isDark]);
+  // 테마는 documentElement 의 클래스가 진실이다 — 첫 페인트 전에 index.html 의
+  // 스크립트가 정해두고, 여기서는 관찰만 한다. 로컬 state 로 들고 있었을 때는
+  // 램프 줄처럼 다른 곳에서 테마를 바꾸면 이 스위치가 어긋났다.
+  const isDark = useIsDark();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     // 최상단에서는 헤더 배경을 투명하게 둔다. 배경을 깔면 Hero 와의 경계에
@@ -90,15 +82,6 @@ const Header = () => {
   const closeMenu = useCallback(() => setMenuOpen(false), []);
   useModalDialog(menuOpen, closeMenu, sheetRef);
 
-  const toggleDarkMode = () => {
-    setIsDark((prev) => {
-      const next = !prev;
-      if (next) document.documentElement.classList.add("dark");
-      else document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", next ? "dark" : "light");
-      return next;
-    });
-  };
 
   return (
     <>
@@ -153,7 +136,7 @@ const Header = () => {
             })}
             <ThemeSwitch
               isDark={isDark}
-              onToggle={toggleDarkMode}
+              onToggle={toggleTheme}
               className="ml-4"
             />
           </nav>
@@ -241,7 +224,7 @@ const Header = () => {
               className="mt-10 flex w-fit items-center gap-3"
             >
               <span className="text-small text-muted">다크 모드</span>
-              <ThemeSwitch isDark={isDark} onToggle={toggleDarkMode} />
+              <ThemeSwitch isDark={isDark} onToggle={toggleTheme} />
             </div>
           </Container>
         </div>

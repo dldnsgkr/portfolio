@@ -1,6 +1,7 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { profile } from "@/data/profile";
 import HeroLamp from "./HeroLamp";
+import PullCord from "./PullCord";
 
 // 이 페이지에서 과감함을 쓰는 유일한 자리. 나머지 섹션은 조용하게 간다.
 // 위계는 색이 아니라 활자 크기와 굵기로만 만든다 (단어 단위 색 강조 없음).
@@ -36,6 +37,8 @@ export default function Hero() {
     >
       {/* 다크 모드에서 천장 램프가 내려와 Hero 를 비춘다 */}
       <HeroLamp />
+      {/* 방 전등 줄. 두 테마에 항상 있고, 당기면 램프가 내려오거나 올라간다. */}
+      <PullCord />
 
       {/* 모노그램이 흐름 안으로 들어왔으므로 광학 보정용 mb 반응형 분기는 없앴다.
           겹침이 구조적으로 생기지 않고, 간격이 뷰포트 폭에 따라 흔들리지도 않는다. */}

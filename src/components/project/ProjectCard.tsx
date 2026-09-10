@@ -1,22 +1,39 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import clsx from "clsx";
-import { useId, useState } from "react";
+import { useId, useLayoutEffect, useState } from "react";
 import ProjectModal from "./ProjectModal";
 import ProjectImageStrip from "./ProjectImageStrip";
 import type { ProjectWrapperType } from "@/types/projectList.types";
+import { reveal } from "@/lib/reveal";
+import { useRevealOnce } from "@/lib/useRevealOnce";
 
 // 앞면에 노출할 스택 태그 개수. 넘치면 +N 으로 접고 전체는 모달에서 보여준다.
 const MAX_TAGS = 4;
 
+// 덱에서 자기 자리까지의 거리 중 실제로 이동에 쓰는 비율.
+// 0.42 로 해봤더니 비행 중 카드가 10장씩 겹쳐 글자가 서로를 덮었다.
+// 0.3 이면 같은 "뿌리는" 인상은 남고 겹침은 눈에 띄게 줄어든다.
+const DEAL_TRAVEL = 0.3;
+// 덱을 그리드 위쪽으로 조금 올려 "위에서 뿌린다"로 읽히게 한다(px).
+const DECK_LIFT = 48;
+// 날아오는 동안의 기울기(도). 홀짝으로 부호를 바꿔 딜러가 번갈아 뿌린 느낌.
+const DEAL_TILT = 7;
+
 const pill =
   "rounded-full border border-muted/40 px-2.5 py-[3px] text-[0.6875rem] text-muted";
 
-export default function ProjectCard(props: ProjectWrapperType) {
+export default function ProjectCard(
+  props: ProjectWrapperType & { index?: number },
+) {
   const [open, setOpen] = useState(false);
   const titleId = useId();
   const reduceMotion = useReducedMotion();
+  const [cardRef, shown] = useRevealOnce<HTMLElement>();
+  // 덱에서 이 카드까지의 거리. useLayoutEffect 로 실측한다.
+  const [from, setFrom] = useState({ x: 0, y: 0 });
 
   const {
+    index = 0,
     title,
     description,
     period,
@@ -41,11 +58,61 @@ export default function ProjectCard(props: ProjectWrapperType) {
   // 데이터 추가가 아니라 troubleShooting 배열 길이에서 파생한 값이다.
   const troubleCount = troubleShooting?.length ?? 0;
 
+  // 딜러가 카드를 뿌리듯, 그리드 좌상단(덱)에서 각자 자리로 날아와 놓인다.
+  // 거리를 전부 쓰면 화면을 가로지르므로 DEAL_TRAVEL 만큼만 쓴다.
+  // stagger 대신 index 로 지연을 주는 건 CSS columns masonry 라서다:
+  // 부모가 지휘하면 열 순서가 아니라 DOM 순서로 깔려 눈에는 뒤죽박죽이 된다.
+  useLayoutEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const deck = el.closest("[data-deck]");
+    if (!deck) return;
+    const d = deck.getBoundingClientRect();
+    const c = el.getBoundingClientRect();
+    setFrom({
+      x: (d.left - c.left) * DEAL_TRAVEL,
+      y: (d.top - DECK_LIFT - c.top) * DEAL_TRAVEL,
+    });
+    // 마운트 시 한 번만 잰다. 이 값이 쓰이는 시점(리빌)에는 카드가 아직
+    // opacity 0 이라, 지연 로딩 이미지로 레이아웃이 조금 밀려도 보이지 않는다.
+    // cardRef 는 useRef 객체라 렌더 사이에 바뀌지 않는다.
+  }, [cardRef]);
+
+  const deal: Variants = {
+    hidden: {
+      opacity: 0,
+      x: from.x,
+      y: from.y,
+      // 날아오는 동안 기울고 착지하며 반듯해진다
+      rotate: index % 2 === 0 ? -DEAL_TILT : DEAL_TILT,
+      scale: 0.96,
+    },
+    shown: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      rotate: 0,
+      scale: 1,
+      transition: reveal(reduceMotion, {
+        type: "spring",
+        stiffness: 190,
+        damping: 21,
+        mass: 0.9,
+        delay: Math.min(index * 0.065, 0.6),
+      }),
+    },
+  };
+
   return (
     <motion.article
-      // 확대(scale)는 썸네일을 흐리게 만든다. 보더 색 전환 + 2px 부양으로 교체.
-      // reduced-motion 에서는 부양을 없앤다 — 어포던스는 보더 색이 맡는다.
-      whileHover={reduceMotion ? undefined : { y: -2 }}
+      ref={cardRef}
+      variants={deal}
+      initial="hidden"
+      animate={shown ? "shown" : "hidden"}
+      // 확대(scale)는 썸네일을 흐리게 만든다. 보더 색 전환 + 부양으로 교체.
+      // 회전을 살짝 얹으면 펠트 위에서 카드를 집어드는 것처럼 읽힌다.
+      // reduced-motion 에서는 둘 다 없앤다 — 어포던스는 보더 색이 맡는다.
+      whileHover={reduceMotion ? undefined : { y: -3, rotate: -0.5 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
       className="mb-6 flex break-inside-avoid cursor-pointer flex-col rounded-2xl border border-muted/40 bg-surface p-6 transition-colors hover:border-accent/60"
       onClick={() => setOpen(true)}
@@ -81,7 +148,9 @@ export default function ProjectCard(props: ProjectWrapperType) {
       </h3>
 
       {periodText && (
-        <p className="mt-1.5 text-small tabular-nums text-muted">{periodText}</p>
+        <p className="mt-1.5 text-small tabular-nums text-muted">
+          {periodText}
+        </p>
       )}
 
       <p

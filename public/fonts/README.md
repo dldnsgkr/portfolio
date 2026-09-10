@@ -4,10 +4,10 @@ GitHub Pages 배포라 외부 CDN 의존을 없애려고 직접 호스팅한다.
 
 | 파일 | 원본 | 크기 | 축 |
 |---|---|---|---|
-| `pretendard-subset.woff2` | [Pretendard](https://github.com/orioncactus/pretendard) v1.3.9 (OFL) | 128 KB | `wght` 45–930 |
+| `pretendard-subset.woff2` | [Pretendard](https://github.com/orioncactus/pretendard) v1.3.9 (OFL) | 158 KB | `wght` 45–930 |
 | `fraunces-subset.woff2` | [Fraunces](https://github.com/googlefonts/fraunces) (OFL) | 120 KB | `opsz` 9–144, `wght` 100–900, `SOFT` 0–100, `WONK` 0–1 |
 
-Pretendard 원본은 2.0 MB 다. 저장소에 실제로 등장하는 글자만 남겨 128 KB 로 줄였다.
+Pretendard 원본은 2.0 MB 다. 저장소에 실제로 등장하는 글자만 남겨 158 KB 로 줄였다.
 전체 한글(11,172자)은 2.0 MB, KS X 1001(2,350자)은 431 KB 였다 — 정적 사이트라 쓰는 글자가 고정이므로 가장 작은 쪽을 골랐다.
 
 ## 대신 치르는 비용
